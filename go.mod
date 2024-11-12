@@ -1,4 +1,4 @@
-module github.com/DanKo-code/FitnessCenter_Protobuf
+module github.com/DanKo-code/FitnessCenter-Protobuf
 
 go 1.23.3
 
