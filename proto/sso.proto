@@ -61,4 +61,6 @@ message RefreshResponse {
   user user = 1;
   string access_token = 2;
   string refresh_token = 3;
+  string access_token_expiration = 4;
+  string refresh_token_expiration = 5;
 }
