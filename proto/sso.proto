@@ -22,6 +22,7 @@ message SignUpResponse {
   string refresh_token = 2;
   string access_token_expiration = 3;
   string refresh_token_expiration = 4;
+  user user = 5;
 }
 
 message SignInRequest {
