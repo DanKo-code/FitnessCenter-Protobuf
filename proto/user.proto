@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package fitness_center.user;
+
+option go_package = "FitnessCenter.protobuf.user";
+
+service User {
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
+}
+
+message UpdateUserRequest {
+  string id = 1;
+  string email = 2;
+  string name = 3;
+  string role = 4;
+  bytes photo = 5;
+}
+
+message UpdateUserResponse {
+  string id = 1;
+  string email = 2;
+  string name = 3;
+  string role = 4;
+  bytes photo = 5;
+}
