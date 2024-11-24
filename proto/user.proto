@@ -5,15 +5,21 @@ package fitness_center.user;
 option go_package = "FitnessCenter.protobuf.user";
 
 service User {
-  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
+  rpc UpdateUser (stream UpdateUserRequest) returns (UpdateUserResponse);
 }
 
 message UpdateUserRequest {
+  oneof payload{
+    UserData userData = 1;
+    bytes userPhoto = 2;
+  }
+}
+
+message UserData {
   string id = 1;
   string email = 2;
   string name = 3;
   string role = 4;
-  bytes photo = 5;
 }
 
 message UpdateUserResponse {
@@ -21,5 +27,5 @@ message UpdateUserResponse {
   string email = 2;
   string name = 3;
   string role = 4;
-  bytes photo = 5;
+  string photo = 5;
 }
