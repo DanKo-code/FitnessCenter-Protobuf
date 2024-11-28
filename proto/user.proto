@@ -6,6 +6,7 @@ option go_package = "FitnessCenter.protobuf.user";
 
 service User {
   rpc UpdateUser (stream UpdateUserRequest) returns (UpdateUserResponse);
+  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
 }
 
 message UpdateUserRequest {
@@ -23,6 +24,21 @@ message UserData {
 }
 
 message UpdateUserResponse {
+  string id = 1;
+  string email = 2;
+  string name = 3;
+  string role = 4;
+  string photo = 5;
+}
+
+message CreateUserRequest {
+  string id = 1;
+  string email = 2;
+  string name = 3;
+  string role = 4;
+}
+
+message CreateUserResponse {
   string id = 1;
   string email = 2;
   string name = 3;
