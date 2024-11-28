@@ -36,6 +36,7 @@ message CreateUserRequest {
   string email = 2;
   string name = 3;
   string role = 4;
+  string password = 5;
 }
 
 message CreateUserResponse {
