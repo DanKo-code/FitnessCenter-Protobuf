@@ -32,11 +32,10 @@ message UpdateUserResponse {
 }
 
 message CreateUserRequest {
-  string id = 1;
-  string email = 2;
-  string name = 3;
-  string role = 4;
-  string password = 5;
+  string email = 1;
+  string name = 2;
+  string role = 3;
+  string password = 4;
 }
 
 message CreateUserResponse {
