@@ -58,6 +58,9 @@ message GetUserByIdResponse {
   string name = 3;
   string role = 4;
   string photo = 5;
+  string created_time = 6;
+  string updated_time = 7;
+  string password_hash = 8;
 }
 
 message GetUserByEmailRequest {
@@ -70,4 +73,7 @@ message GetUserByEmailResponse {
   string name = 3;
   string role = 4;
   string photo = 5;
+  string created_time = 6;
+  string updated_time = 7;
+  string password_hash = 8;
 }
