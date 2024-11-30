@@ -21,17 +21,13 @@ message CoachData {
 }
 
 message CreateCoachRequest {
-  string id = 1;
   string name = 2;
   string description = 3;
   string photo = 4;
 }
 
 message CreateCoachResponse {
-  string id = 1;
-  string name = 2;
-  string description = 3;
-  string photo = 4;
+  CoachData coachData = 1;
 }
 
 message GetCoachesResponse {
@@ -47,15 +43,9 @@ message DeleteCoachResponse {
 }
 
 message PutCoachRequest {
-  string id = 1;
-  string name = 2;
-  string description = 3;
-  string photo = 4;
+  CoachData coachData = 1;
 }
 
 message PutCoachResponse {
-  string id = 1;
-  string name = 2;
-  string description = 3;
-  string photo = 4;
+  CoachData coachData = 1;
 }
