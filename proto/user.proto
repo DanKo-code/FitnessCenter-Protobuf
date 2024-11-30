@@ -7,6 +7,8 @@ option go_package = "FitnessCenter.protobuf.user";
 service User {
   rpc UpdateUser (stream UpdateUserRequest) returns (UpdateUserResponse);
   rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+  rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
+  rpc GetUserByEmail (GetUserByEmailRequest) returns (GetUserByEmailResponse);
 }
 
 message UpdateUserRequest {
@@ -39,6 +41,30 @@ message CreateUserRequest {
 }
 
 message CreateUserResponse {
+  string id = 1;
+  string email = 2;
+  string name = 3;
+  string role = 4;
+  string photo = 5;
+}
+
+message GetUserByIdRequest {
+  string id = 1;
+}
+
+message GetUserByIdResponse {
+  string id = 1;
+  string email = 2;
+  string name = 3;
+  string role = 4;
+  string photo = 5;
+}
+
+message GetUserByEmailRequest {
+  string email = 1;
+}
+
+message GetUserByEmailResponse {
   string id = 1;
   string email = 2;
   string name = 3;
