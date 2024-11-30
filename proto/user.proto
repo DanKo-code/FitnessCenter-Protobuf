@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "google/protobuf/empty.proto";
+
 package fitness_center.user;
 
 option go_package = "FitnessCenter.protobuf.user";
@@ -11,11 +13,19 @@ service User {
   rpc GetUserByEmail (GetUserByEmailRequest) returns (GetUserByEmailResponse);
 }
 
-message UpdateUserRequest {
-  oneof payload{
-    UserData userData = 1;
-    bytes userPhoto = 2;
-  }
+message CreateUserRequest {
+  string email = 1;
+  string name = 2;
+  string role = 3;
+  string password = 4;
+}
+
+message CreateUserResponse {
+  string id = 1;
+  string email = 2;
+  string name = 3;
+  string role = 4;
+  string photo = 5;
 }
 
 message UserData {
@@ -25,22 +35,14 @@ message UserData {
   string role = 4;
 }
 
+message UpdateUserRequest {
+  oneof payload{
+    UserData userData = 1;
+    bytes userPhoto = 2;
+  }
+}
+
 message UpdateUserResponse {
-  string id = 1;
-  string email = 2;
-  string name = 3;
-  string role = 4;
-  string photo = 5;
-}
-
-message CreateUserRequest {
-  string email = 1;
-  string name = 2;
-  string role = 3;
-  string password = 4;
-}
-
-message CreateUserResponse {
   string id = 1;
   string email = 2;
   string name = 3;
