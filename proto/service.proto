@@ -21,7 +21,7 @@ message ServiceData {
 }
 
 message GetServicesResponse {
-    ServiceData serviceData = 1;
+    repeated ServiceData serviceData = 1;
 }
 
 message CreateServiceRequest {
