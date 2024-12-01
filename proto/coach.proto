@@ -9,6 +9,7 @@ option go_package = "FitnessCenter.protobuf.coach";
 service Coach {
   rpc CreateCoach (CreateCoachRequest) returns (CreateCoachResponse);
   rpc GetCoaches (google.protobuf.Empty) returns (GetCoachesResponse);
+  rpc GetCoachById (google.protobuf.Empty) returns (GetCoachByIdResponse);
   rpc DeleteCoachById (DeleteCoachRequest) returns (DeleteCoachResponse);
   rpc UpdateCoach (stream UpdateCoachRequest) returns (UpdateCoachResponse);
 }
@@ -48,6 +49,11 @@ message UpdateCoachRequest {
 }
 
 message UpdateCoachResponse {
+  CoachData coachData = 1;
+  string url = 2;
+}
+
+message GetCoachByIdResponse {
   CoachData coachData = 1;
   string url = 2;
 }
