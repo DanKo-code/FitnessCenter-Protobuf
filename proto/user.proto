@@ -5,7 +5,7 @@ package fitness_center.user;
 option go_package = "FitnessCenter.protobuf.user";
 
 service User {
-  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+  rpc CreateUser (stream CreateUserRequest) returns (CreateUserResponse);
   rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
   rpc UpdateUser (stream UpdateUserRequest) returns (UpdateUserResponse);
   rpc DeleteUserById (DeleteUserByIdRequest) returns (DeleteUserByIdResponse);
