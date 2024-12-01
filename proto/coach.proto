@@ -10,7 +10,7 @@ service Coach {
   rpc CreateCoach (CreateCoachRequest) returns (CreateCoachResponse);
   rpc GetCoaches (google.protobuf.Empty) returns (GetCoachesResponse);
   rpc DeleteCoachById (DeleteCoachRequest) returns (DeleteCoachResponse);
-  rpc PutCoach (PutCoachRequest) returns (PutCoachResponse);
+  rpc UpdateCoach (stream UpdateCoachRequest) returns (UpdateCoachResponse);
 }
 
 message CoachData {
@@ -40,13 +40,13 @@ message DeleteCoachResponse {
   CoachData coach = 1;
 }
 
-message PutCoachRequest {
+message UpdateCoachRequest {
   oneof payload{
     CoachData coachData = 1;
     bytes coachPhoto = 2;
   }
 }
 
-message PutCoachResponse {
+message UpdateCoachResponse {
   CoachData coachData = 1;
 }

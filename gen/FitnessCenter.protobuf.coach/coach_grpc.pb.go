@@ -23,7 +23,7 @@ const (
 	Coach_CreateCoach_FullMethodName     = "/fitness_center.coach.Coach/CreateCoach"
 	Coach_GetCoaches_FullMethodName      = "/fitness_center.coach.Coach/GetCoaches"
 	Coach_DeleteCoachById_FullMethodName = "/fitness_center.coach.Coach/DeleteCoachById"
-	Coach_PutCoach_FullMethodName        = "/fitness_center.coach.Coach/PutCoach"
+	Coach_UpdateCoach_FullMethodName     = "/fitness_center.coach.Coach/UpdateCoach"
 )
 
 // CoachClient is the client API for Coach service.
@@ -33,7 +33,7 @@ type CoachClient interface {
 	CreateCoach(ctx context.Context, in *CreateCoachRequest, opts ...grpc.CallOption) (*CreateCoachResponse, error)
 	GetCoaches(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCoachesResponse, error)
 	DeleteCoachById(ctx context.Context, in *DeleteCoachRequest, opts ...grpc.CallOption) (*DeleteCoachResponse, error)
-	PutCoach(ctx context.Context, in *PutCoachRequest, opts ...grpc.CallOption) (*PutCoachResponse, error)
+	UpdateCoach(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UpdateCoachRequest, UpdateCoachResponse], error)
 }
 
 type coachClient struct {
@@ -74,15 +74,18 @@ func (c *coachClient) DeleteCoachById(ctx context.Context, in *DeleteCoachReques
 	return out, nil
 }
 
-func (c *coachClient) PutCoach(ctx context.Context, in *PutCoachRequest, opts ...grpc.CallOption) (*PutCoachResponse, error) {
+func (c *coachClient) UpdateCoach(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UpdateCoachRequest, UpdateCoachResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PutCoachResponse)
-	err := c.cc.Invoke(ctx, Coach_PutCoach_FullMethodName, in, out, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Coach_ServiceDesc.Streams[0], Coach_UpdateCoach_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &grpc.GenericClientStream[UpdateCoachRequest, UpdateCoachResponse]{ClientStream: stream}
+	return x, nil
 }
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Coach_UpdateCoachClient = grpc.ClientStreamingClient[UpdateCoachRequest, UpdateCoachResponse]
 
 // CoachServer is the server API for Coach service.
 // All implementations must embed UnimplementedCoachServer
@@ -91,7 +94,7 @@ type CoachServer interface {
 	CreateCoach(context.Context, *CreateCoachRequest) (*CreateCoachResponse, error)
 	GetCoaches(context.Context, *emptypb.Empty) (*GetCoachesResponse, error)
 	DeleteCoachById(context.Context, *DeleteCoachRequest) (*DeleteCoachResponse, error)
-	PutCoach(context.Context, *PutCoachRequest) (*PutCoachResponse, error)
+	UpdateCoach(grpc.ClientStreamingServer[UpdateCoachRequest, UpdateCoachResponse]) error
 	mustEmbedUnimplementedCoachServer()
 }
 
@@ -111,8 +114,8 @@ func (UnimplementedCoachServer) GetCoaches(context.Context, *emptypb.Empty) (*Ge
 func (UnimplementedCoachServer) DeleteCoachById(context.Context, *DeleteCoachRequest) (*DeleteCoachResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCoachById not implemented")
 }
-func (UnimplementedCoachServer) PutCoach(context.Context, *PutCoachRequest) (*PutCoachResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PutCoach not implemented")
+func (UnimplementedCoachServer) UpdateCoach(grpc.ClientStreamingServer[UpdateCoachRequest, UpdateCoachResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method UpdateCoach not implemented")
 }
 func (UnimplementedCoachServer) mustEmbedUnimplementedCoachServer() {}
 func (UnimplementedCoachServer) testEmbeddedByValue()               {}
@@ -189,23 +192,12 @@ func _Coach_DeleteCoachById_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Coach_PutCoach_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PutCoachRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoachServer).PutCoach(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Coach_PutCoach_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoachServer).PutCoach(ctx, req.(*PutCoachRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+func _Coach_UpdateCoach_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(CoachServer).UpdateCoach(&grpc.GenericServerStream[UpdateCoachRequest, UpdateCoachResponse]{ServerStream: stream})
 }
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Coach_UpdateCoachServer = grpc.ClientStreamingServer[UpdateCoachRequest, UpdateCoachResponse]
 
 // Coach_ServiceDesc is the grpc.ServiceDesc for Coach service.
 // It's only intended for direct use with grpc.RegisterService,
@@ -226,11 +218,13 @@ var Coach_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "DeleteCoachById",
 			Handler:    _Coach_DeleteCoachById_Handler,
 		},
+	},
+	Streams: []grpc.StreamDesc{
 		{
-			MethodName: "PutCoach",
-			Handler:    _Coach_PutCoach_Handler,
+			StreamName:    "UpdateCoach",
+			Handler:       _Coach_UpdateCoach_Handler,
+			ClientStreams: true,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
 	Metadata: "coach.proto",
 }
