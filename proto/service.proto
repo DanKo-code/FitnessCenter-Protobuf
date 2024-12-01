@@ -14,21 +14,18 @@ service Service {
   rpc GetServiceById (GetServiceByIdRequest) returns (GetServiceByIdResponse);
 }
 
-message GetServicesResponse {
-  string id = 1;
-  string title = 2;
-  string photo = 3;
-}
-
 message ServiceData {
   string id = 1;
   string title = 2;
   string photo = 3;
 }
 
+message GetServicesResponse {
+    ServiceData serviceData = 1;
+}
+
 message CreateServiceRequest {
   string title = 1;
-  string photo = 2;
 }
 
 message CreateServiceResponse {
@@ -36,7 +33,10 @@ message CreateServiceResponse {
 }
 
 message UpdateServiceRequest  {
-  ServiceData serviceData = 1;
+  oneof payload{
+    ServiceData serviceData = 1;
+    bytes servicePhoto = 2;
+  }
 }
 
 message UpdateServiceResponse  {

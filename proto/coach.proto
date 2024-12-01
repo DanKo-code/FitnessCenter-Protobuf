@@ -17,13 +17,11 @@ message CoachData {
   string id = 1;
   string name = 2;
   string description = 3;
-  string photo = 4;
 }
 
 message CreateCoachRequest {
   string name = 2;
   string description = 3;
-  string photo = 4;
 }
 
 message CreateCoachResponse {
@@ -43,7 +41,10 @@ message DeleteCoachResponse {
 }
 
 message PutCoachRequest {
-  CoachData coachData = 1;
+  oneof payload{
+    CoachData coachData = 1;
+    bytes coachPhoto = 2;
+  }
 }
 
 message PutCoachResponse {
