@@ -1,5 +1,5 @@
 generate_sso:
-	@protoc -I ./proto sso.proto --go_out=./gen --go-grpc_out=./gen
+	@protoc -I ./proto sso.proto --go_out=./gen --go-grpc_out=./gen --go_opt=Muser.proto=github.com/DanKo-code/FitnessCenter-Protobuf/gen/FitnessCenter.protobuf.user
 
 generate_user:
 	@protoc -I ./proto user.proto --go_out=./gen --go-grpc_out=./gen
