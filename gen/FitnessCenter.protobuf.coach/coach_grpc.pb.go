@@ -33,7 +33,7 @@ const (
 type CoachClient interface {
 	CreateCoach(ctx context.Context, in *CreateCoachRequest, opts ...grpc.CallOption) (*CreateCoachResponse, error)
 	GetCoaches(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCoachesResponse, error)
-	GetCoachById(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCoachByIdResponse, error)
+	GetCoachById(ctx context.Context, in *GetCoachByIdRequest, opts ...grpc.CallOption) (*GetCoachByIdResponse, error)
 	DeleteCoachById(ctx context.Context, in *DeleteCoachRequest, opts ...grpc.CallOption) (*DeleteCoachResponse, error)
 	UpdateCoach(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UpdateCoachRequest, UpdateCoachResponse], error)
 }
@@ -66,7 +66,7 @@ func (c *coachClient) GetCoaches(ctx context.Context, in *emptypb.Empty, opts ..
 	return out, nil
 }
 
-func (c *coachClient) GetCoachById(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCoachByIdResponse, error) {
+func (c *coachClient) GetCoachById(ctx context.Context, in *GetCoachByIdRequest, opts ...grpc.CallOption) (*GetCoachByIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetCoachByIdResponse)
 	err := c.cc.Invoke(ctx, Coach_GetCoachById_FullMethodName, in, out, cOpts...)
@@ -105,7 +105,7 @@ type Coach_UpdateCoachClient = grpc.ClientStreamingClient[UpdateCoachRequest, Up
 type CoachServer interface {
 	CreateCoach(context.Context, *CreateCoachRequest) (*CreateCoachResponse, error)
 	GetCoaches(context.Context, *emptypb.Empty) (*GetCoachesResponse, error)
-	GetCoachById(context.Context, *emptypb.Empty) (*GetCoachByIdResponse, error)
+	GetCoachById(context.Context, *GetCoachByIdRequest) (*GetCoachByIdResponse, error)
 	DeleteCoachById(context.Context, *DeleteCoachRequest) (*DeleteCoachResponse, error)
 	UpdateCoach(grpc.ClientStreamingServer[UpdateCoachRequest, UpdateCoachResponse]) error
 	mustEmbedUnimplementedCoachServer()
@@ -124,7 +124,7 @@ func (UnimplementedCoachServer) CreateCoach(context.Context, *CreateCoachRequest
 func (UnimplementedCoachServer) GetCoaches(context.Context, *emptypb.Empty) (*GetCoachesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCoaches not implemented")
 }
-func (UnimplementedCoachServer) GetCoachById(context.Context, *emptypb.Empty) (*GetCoachByIdResponse, error) {
+func (UnimplementedCoachServer) GetCoachById(context.Context, *GetCoachByIdRequest) (*GetCoachByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCoachById not implemented")
 }
 func (UnimplementedCoachServer) DeleteCoachById(context.Context, *DeleteCoachRequest) (*DeleteCoachResponse, error) {
@@ -191,7 +191,7 @@ func _Coach_GetCoaches_Handler(srv interface{}, ctx context.Context, dec func(in
 }
 
 func _Coach_GetCoachById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(GetCoachByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -203,7 +203,7 @@ func _Coach_GetCoachById_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: Coach_GetCoachById_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoachServer).GetCoachById(ctx, req.(*emptypb.Empty))
+		return srv.(CoachServer).GetCoachById(ctx, req.(*GetCoachByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
