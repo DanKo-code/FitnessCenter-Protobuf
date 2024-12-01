@@ -33,7 +33,7 @@ const (
 type ServiceClient interface {
 	GetServices(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetServicesResponse, error)
 	CreateService(ctx context.Context, in *CreateServiceRequest, opts ...grpc.CallOption) (*CreateServiceResponse, error)
-	UpdateService(ctx context.Context, in *UpdateServiceRequest, opts ...grpc.CallOption) (*UpdateServiceResponse, error)
+	UpdateService(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UpdateServiceRequest, UpdateServiceResponse], error)
 	DeleteService(ctx context.Context, in *DeleteServiceRequest, opts ...grpc.CallOption) (*DeleteServiceResponse, error)
 	GetServiceById(ctx context.Context, in *GetServiceByIdRequest, opts ...grpc.CallOption) (*GetServiceByIdResponse, error)
 }
@@ -66,15 +66,18 @@ func (c *serviceClient) CreateService(ctx context.Context, in *CreateServiceRequ
 	return out, nil
 }
 
-func (c *serviceClient) UpdateService(ctx context.Context, in *UpdateServiceRequest, opts ...grpc.CallOption) (*UpdateServiceResponse, error) {
+func (c *serviceClient) UpdateService(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UpdateServiceRequest, UpdateServiceResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateServiceResponse)
-	err := c.cc.Invoke(ctx, Service_UpdateService_FullMethodName, in, out, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Service_ServiceDesc.Streams[0], Service_UpdateService_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &grpc.GenericClientStream[UpdateServiceRequest, UpdateServiceResponse]{ClientStream: stream}
+	return x, nil
 }
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Service_UpdateServiceClient = grpc.ClientStreamingClient[UpdateServiceRequest, UpdateServiceResponse]
 
 func (c *serviceClient) DeleteService(ctx context.Context, in *DeleteServiceRequest, opts ...grpc.CallOption) (*DeleteServiceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -102,7 +105,7 @@ func (c *serviceClient) GetServiceById(ctx context.Context, in *GetServiceByIdRe
 type ServiceServer interface {
 	GetServices(context.Context, *emptypb.Empty) (*GetServicesResponse, error)
 	CreateService(context.Context, *CreateServiceRequest) (*CreateServiceResponse, error)
-	UpdateService(context.Context, *UpdateServiceRequest) (*UpdateServiceResponse, error)
+	UpdateService(grpc.ClientStreamingServer[UpdateServiceRequest, UpdateServiceResponse]) error
 	DeleteService(context.Context, *DeleteServiceRequest) (*DeleteServiceResponse, error)
 	GetServiceById(context.Context, *GetServiceByIdRequest) (*GetServiceByIdResponse, error)
 	mustEmbedUnimplementedServiceServer()
@@ -121,8 +124,8 @@ func (UnimplementedServiceServer) GetServices(context.Context, *emptypb.Empty) (
 func (UnimplementedServiceServer) CreateService(context.Context, *CreateServiceRequest) (*CreateServiceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateService not implemented")
 }
-func (UnimplementedServiceServer) UpdateService(context.Context, *UpdateServiceRequest) (*UpdateServiceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateService not implemented")
+func (UnimplementedServiceServer) UpdateService(grpc.ClientStreamingServer[UpdateServiceRequest, UpdateServiceResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method UpdateService not implemented")
 }
 func (UnimplementedServiceServer) DeleteService(context.Context, *DeleteServiceRequest) (*DeleteServiceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteService not implemented")
@@ -187,23 +190,12 @@ func _Service_CreateService_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_UpdateService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateServiceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceServer).UpdateService(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Service_UpdateService_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).UpdateService(ctx, req.(*UpdateServiceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+func _Service_UpdateService_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(ServiceServer).UpdateService(&grpc.GenericServerStream[UpdateServiceRequest, UpdateServiceResponse]{ServerStream: stream})
 }
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Service_UpdateServiceServer = grpc.ClientStreamingServer[UpdateServiceRequest, UpdateServiceResponse]
 
 func _Service_DeleteService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteServiceRequest)
@@ -257,10 +249,6 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Service_CreateService_Handler,
 		},
 		{
-			MethodName: "UpdateService",
-			Handler:    _Service_UpdateService_Handler,
-		},
-		{
 			MethodName: "DeleteService",
 			Handler:    _Service_DeleteService_Handler,
 		},
@@ -269,6 +257,12 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Service_GetServiceById_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "UpdateService",
+			Handler:       _Service_UpdateService_Handler,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "service.proto",
 }

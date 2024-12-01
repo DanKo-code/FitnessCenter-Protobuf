@@ -9,7 +9,7 @@ option go_package = "FitnessCenter.protobuf.service";
 service Service {
   rpc GetServices (google.protobuf.Empty) returns (GetServicesResponse);
   rpc CreateService (CreateServiceRequest) returns (CreateServiceResponse);
-  rpc UpdateService (UpdateServiceRequest) returns (UpdateServiceResponse);
+  rpc UpdateService (stream UpdateServiceRequest) returns (UpdateServiceResponse);
   rpc DeleteService (DeleteServiceRequest) returns (DeleteServiceResponse);
   rpc GetServiceById (GetServiceByIdRequest) returns (GetServiceByIdResponse);
 }
