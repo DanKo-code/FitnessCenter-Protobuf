@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	User_UpdateUser_FullMethodName     = "/fitness_center.user.User/UpdateUser"
 	User_CreateUser_FullMethodName     = "/fitness_center.user.User/CreateUser"
 	User_GetUserById_FullMethodName    = "/fitness_center.user.User/GetUserById"
+	User_UpdateUser_FullMethodName     = "/fitness_center.user.User/UpdateUser"
+	User_DeleteUserById_FullMethodName = "/fitness_center.user.User/DeleteUserById"
 	User_GetUserByEmail_FullMethodName = "/fitness_center.user.User/GetUserByEmail"
 )
 
@@ -29,9 +30,10 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserClient interface {
-	UpdateUser(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UpdateUserRequest, UpdateUserResponse], error)
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	GetUserById(ctx context.Context, in *GetUserByIdRequest, opts ...grpc.CallOption) (*GetUserByIdResponse, error)
+	UpdateUser(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UpdateUserRequest, UpdateUserResponse], error)
+	DeleteUserById(ctx context.Context, in *DeleteUserByIdRequest, opts ...grpc.CallOption) (*DeleteUserByIdResponse, error)
 	GetUserByEmail(ctx context.Context, in *GetUserByEmailRequest, opts ...grpc.CallOption) (*GetUserByEmailResponse, error)
 }
 
@@ -42,19 +44,6 @@ type userClient struct {
 func NewUserClient(cc grpc.ClientConnInterface) UserClient {
 	return &userClient{cc}
 }
-
-func (c *userClient) UpdateUser(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UpdateUserRequest, UpdateUserResponse], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &User_ServiceDesc.Streams[0], User_UpdateUser_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[UpdateUserRequest, UpdateUserResponse]{ClientStream: stream}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type User_UpdateUserClient = grpc.ClientStreamingClient[UpdateUserRequest, UpdateUserResponse]
 
 func (c *userClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -76,6 +65,29 @@ func (c *userClient) GetUserById(ctx context.Context, in *GetUserByIdRequest, op
 	return out, nil
 }
 
+func (c *userClient) UpdateUser(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UpdateUserRequest, UpdateUserResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &User_ServiceDesc.Streams[0], User_UpdateUser_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[UpdateUserRequest, UpdateUserResponse]{ClientStream: stream}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type User_UpdateUserClient = grpc.ClientStreamingClient[UpdateUserRequest, UpdateUserResponse]
+
+func (c *userClient) DeleteUserById(ctx context.Context, in *DeleteUserByIdRequest, opts ...grpc.CallOption) (*DeleteUserByIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteUserByIdResponse)
+	err := c.cc.Invoke(ctx, User_DeleteUserById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) GetUserByEmail(ctx context.Context, in *GetUserByEmailRequest, opts ...grpc.CallOption) (*GetUserByEmailResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserByEmailResponse)
@@ -90,9 +102,10 @@ func (c *userClient) GetUserByEmail(ctx context.Context, in *GetUserByEmailReque
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
 type UserServer interface {
-	UpdateUser(grpc.ClientStreamingServer[UpdateUserRequest, UpdateUserResponse]) error
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	GetUserById(context.Context, *GetUserByIdRequest) (*GetUserByIdResponse, error)
+	UpdateUser(grpc.ClientStreamingServer[UpdateUserRequest, UpdateUserResponse]) error
+	DeleteUserById(context.Context, *DeleteUserByIdRequest) (*DeleteUserByIdResponse, error)
 	GetUserByEmail(context.Context, *GetUserByEmailRequest) (*GetUserByEmailResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
@@ -104,14 +117,17 @@ type UserServer interface {
 // pointer dereference when methods are called.
 type UnimplementedUserServer struct{}
 
-func (UnimplementedUserServer) UpdateUser(grpc.ClientStreamingServer[UpdateUserRequest, UpdateUserResponse]) error {
-	return status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
-}
 func (UnimplementedUserServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
 }
 func (UnimplementedUserServer) GetUserById(context.Context, *GetUserByIdRequest) (*GetUserByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserById not implemented")
+}
+func (UnimplementedUserServer) UpdateUser(grpc.ClientStreamingServer[UpdateUserRequest, UpdateUserResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedUserServer) DeleteUserById(context.Context, *DeleteUserByIdRequest) (*DeleteUserByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUserById not implemented")
 }
 func (UnimplementedUserServer) GetUserByEmail(context.Context, *GetUserByEmailRequest) (*GetUserByEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserByEmail not implemented")
@@ -136,13 +152,6 @@ func RegisterUserServer(s grpc.ServiceRegistrar, srv UserServer) {
 	}
 	s.RegisterService(&User_ServiceDesc, srv)
 }
-
-func _User_UpdateUser_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(UserServer).UpdateUser(&grpc.GenericServerStream[UpdateUserRequest, UpdateUserResponse]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type User_UpdateUserServer = grpc.ClientStreamingServer[UpdateUserRequest, UpdateUserResponse]
 
 func _User_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateUserRequest)
@@ -180,6 +189,31 @@ func _User_GetUserById_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_UpdateUser_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(UserServer).UpdateUser(&grpc.GenericServerStream[UpdateUserRequest, UpdateUserResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type User_UpdateUserServer = grpc.ClientStreamingServer[UpdateUserRequest, UpdateUserResponse]
+
+func _User_DeleteUserById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUserByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).DeleteUserById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_DeleteUserById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).DeleteUserById(ctx, req.(*DeleteUserByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_GetUserByEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserByEmailRequest)
 	if err := dec(in); err != nil {
@@ -212,6 +246,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserById",
 			Handler:    _User_GetUserById_Handler,
+		},
+		{
+			MethodName: "DeleteUserById",
+			Handler:    _User_DeleteUserById_Handler,
 		},
 		{
 			MethodName: "GetUserByEmail",

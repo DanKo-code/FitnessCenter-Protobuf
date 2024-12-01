@@ -8,56 +8,68 @@ option go_package = "FitnessCenter.protobuf.coach";
 
 service Coach {
   rpc CreateCoach (CreateCoachRequest) returns (CreateCoachResponse);
-  rpc GetCoaches (google.protobuf.Empty) returns (GetCoachesResponse);
   rpc GetCoachById (GetCoachByIdRequest) returns (GetCoachByIdResponse);
-  rpc DeleteCoachById (DeleteCoachRequest) returns (DeleteCoachResponse);
   rpc UpdateCoach (stream UpdateCoachRequest) returns (UpdateCoachResponse);
+  rpc DeleteCoachById (DeleteCoachByIdRequest) returns (DeleteCoachByIdResponse);
+
+  rpc GetCoaches (google.protobuf.Empty) returns (GetCoachesResponse);
 }
 
-message CoachData {
+message CoachObject {
   string id = 1;
   string name = 2;
   string description = 3;
+  string photo = 4;
+  string created_time = 5;
+  string updated_time = 6;
+}
+
+message CoachDataForCreate {
+  string name = 1;
+  string description = 2;
+  repeated string coach_service_ids = 3;
+}
+message CoachDataForUpdate {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  repeated string coach_service_ids = 4;
 }
 
 message CreateCoachRequest {
-  string name = 2;
-  string description = 3;
-}
-
-message CreateCoachResponse {
-  CoachData coachData = 1;
-}
-
-message GetCoachesResponse {
-  repeated CoachData coaches = 1;
-}
-
-message DeleteCoachRequest {
-  string id = 1;
-}
-
-message DeleteCoachResponse {
-  CoachData coach = 1;
-}
-
-message UpdateCoachRequest {
-  oneof payload{
-    CoachData coachData = 1;
-    bytes coachPhoto = 2;
+  oneof payload {
+      CoachDataForCreate coachDataForCreate = 1;
+      bytes coachPhoto = 2;
   }
 }
-
-message UpdateCoachResponse {
-  CoachData coachData = 1;
-  string url = 2;
+message CreateCoachResponse {
+  CoachObject coachObject = 1;
 }
 
 message GetCoachByIdRequest {
   string id = 1;
 }
-
 message GetCoachByIdResponse {
-  CoachData coachData = 1;
-  string url = 2;
+  CoachObject coachObject = 1;
+}
+
+message UpdateCoachRequest {
+  oneof payload {
+    CoachDataForUpdate coachDataForUpdate = 1;
+    bytes coachPhoto = 2;
+  }
+}
+message UpdateCoachResponse {
+  CoachObject coachObject = 1;
+}
+
+message DeleteCoachByIdRequest {
+  string id = 1;
+}
+message DeleteCoachByIdResponse {
+  CoachObject coachObject = 1;
+}
+
+message GetCoachesResponse {
+  repeated CoachObject coachObject = 1;
 }

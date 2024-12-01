@@ -7,54 +7,77 @@ package fitness_center.service;
 option go_package = "FitnessCenter.protobuf.service";
 
 service Service {
-  rpc GetServices (google.protobuf.Empty) returns (GetServicesResponse);
   rpc CreateService (CreateServiceRequest) returns (CreateServiceResponse);
-  rpc UpdateService (stream UpdateServiceRequest) returns (UpdateServiceResponse);
-  rpc DeleteService (DeleteServiceRequest) returns (DeleteServiceResponse);
   rpc GetServiceById (GetServiceByIdRequest) returns (GetServiceByIdResponse);
+  rpc UpdateService (stream UpdateServiceRequest) returns (UpdateServiceResponse);
+  rpc DeleteServiceById (DeleteServiceByIdRequest) returns (DeleteServiceByIdResponse);
+
+  rpc GetServices (google.protobuf.Empty) returns (GetServicesResponse);
+  rpc CreateCoachServices (CreateCoachServicesRequest) returns (CreateCoachServicesResponse);
 }
 
-message ServiceData {
+message ServiceObject {
   string id = 1;
   string title = 2;
   string photo = 3;
+  string created_time = 4;
+  string updated_time = 5;
 }
 
-message GetServicesResponse {
-    repeated ServiceData serviceData = 1;
+message ServiceDataForCreate {
+  string title = 1;
 }
-
-message CreateServiceRequest {
+message ServiceDataForUpdate {
   string title = 1;
 }
 
-message CreateServiceResponse {
-  ServiceData serviceData = 1;
+message CoachService {
+  string coachId = 1;
+  string serviceId = 2;
 }
 
-message UpdateServiceRequest  {
-  oneof payload{
-    ServiceData serviceData = 1;
-    bytes servicePhoto = 2;
+message CreateServiceRequest {
+  oneof payload {
+      ServiceDataForCreate serviceDataForCreate = 1;
+      bytes servicePhoto = 2;
   }
 }
-
-message UpdateServiceResponse  {
-  ServiceData serviceData = 1;
-}
-
-message DeleteServiceRequest {
-  string id = 1;
-}
-
-message DeleteServiceResponse {
-  ServiceData serviceData = 1;
+message CreateServiceResponse {
+  ServiceObject serviceObject = 1;
 }
 
 message GetServiceByIdRequest {
   string id = 1;
 }
-
 message GetServiceByIdResponse {
-  ServiceData serviceData = 1;
+  ServiceObject serviceObject = 1;
+}
+
+message UpdateServiceRequest  {
+  oneof payload{
+    ServiceDataForUpdate serviceDataForUpdate = 1;
+    bytes servicePhoto = 2;
+  }
+}
+message UpdateServiceResponse  {
+  ServiceObject serviceObject = 1;
+}
+
+message DeleteServiceByIdRequest {
+  string id = 1;
+}
+message DeleteServiceByIdResponse {
+  ServiceObject serviceObject = 1;
+}
+
+message GetServicesResponse {
+  repeated ServiceObject serviceObject = 1;
+}
+
+message CreateCoachServicesRequest {
+  string coachId = 1;
+  repeated string serviceId = 2;
+}
+message CreateCoachServicesResponse {
+  repeated CoachService coachService = 1;
 }

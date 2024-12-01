@@ -1,81 +1,78 @@
 syntax = "proto3";
 
-import "google/protobuf/empty.proto";
-
 package fitness_center.user;
 
 option go_package = "FitnessCenter.protobuf.user";
 
 service User {
-  rpc UpdateUser (stream UpdateUserRequest) returns (UpdateUserResponse);
   rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
   rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
+  rpc UpdateUser (stream UpdateUserRequest) returns (UpdateUserResponse);
+  rpc DeleteUserById (DeleteUserByIdRequest) returns (DeleteUserByIdResponse);
+
   rpc GetUserByEmail (GetUserByEmailRequest) returns (GetUserByEmailResponse);
 }
 
-message CreateUserRequest {
-  string email = 1;
-  string name = 2;
+message UserObject {
+  string id = 1;
+  string email = 2;
   string role = 3;
-  string password = 4;
+  string photo = 4;
+  string name = 5;
+  string created_time = 6;
+  string updated_time = 7;
 }
 
-message CreateUserResponse {
+message UserDataForCreate {
+  string email = 1;
+  string role = 2;
+  string password = 3;
+  string name = 4;
+}
+message UserDataForUpdate {
   string id = 1;
   string email = 2;
-  string name = 3;
-  string role = 4;
-  string photo = 5;
+  string role = 3;
+  string name = 4;
 }
 
-message UserData {
-  string id = 1;
-  string email = 2;
-  string name = 3;
-  string role = 4;
-}
-
-message UpdateUserRequest {
-  oneof payload{
-    UserData userData = 1;
-    bytes userPhoto = 2;
+message CreateUserRequest {
+  oneof payload {
+      UserDataForCreate userDataForCreate = 1;
+      bytes userPhoto = 2;
   }
 }
-
-message UpdateUserResponse {
-  string id = 1;
-  string email = 2;
-  string name = 3;
-  string role = 4;
-  string photo = 5;
+message CreateUserResponse {
+    UserObject userObject = 1;
 }
 
 message GetUserByIdRequest {
   string id = 1;
 }
-
 message GetUserByIdResponse {
-  string id = 1;
-  string email = 2;
-  string name = 3;
-  string role = 4;
-  string photo = 5;
-  string created_time = 6;
-  string updated_time = 7;
-  string password_hash = 8;
+  UserObject userObject = 1;
+}
+
+message UpdateUserRequest {
+  oneof payload{
+    UserDataForUpdate userDataForUpdate = 1;
+    bytes userPhoto = 2;
+  }
+}
+message UpdateUserResponse {
+    UserObject userObject = 1;
+}
+
+message DeleteUserByIdRequest {
+ string id = 1;
+}
+message DeleteUserByIdResponse {
+    UserObject userObject = 1;
 }
 
 message GetUserByEmailRequest {
   string email = 1;
 }
-
 message GetUserByEmailResponse {
-  string id = 1;
-  string email = 2;
-  string name = 3;
-  string role = 4;
-  string photo = 5;
-  string created_time = 6;
-  string updated_time = 7;
-  string password_hash = 8;
+    UserObject userObject = 1;
 }

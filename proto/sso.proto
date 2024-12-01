@@ -4,10 +4,13 @@ package fitness_center.sso;
 
 option go_package = "FitnessCenter.protobuf.sso";
 
+import "google/protobuf/empty.proto";
+import "user.proto";
+
 service SSO {
   rpc SignUp (SignUpRequest) returns (SignUpResponse);
   rpc SignIn (SignInRequest) returns (SignInResponse);
-  rpc LogOut (LogOutRequest) returns (LogOutResponse);
+  rpc LogOut (LogOutRequest) returns (google.protobuf.Empty);
   rpc Refresh (RefreshRequest) returns (RefreshResponse);
 }
 
@@ -22,7 +25,7 @@ message SignUpResponse {
   string refresh_token = 2;
   string access_token_expiration = 3;
   string refresh_token_expiration = 4;
-  user user = 5;
+  fitness_center.user.UserObject user = 5;
 }
 
 message SignInRequest {
@@ -35,23 +38,11 @@ message SignInResponse {
   string refresh_token = 2;
   string access_token_expiration = 3;
   string refresh_token_expiration = 4;
-  user user = 5;
-}
-message user {
-  string id = 1;
-  string name = 2;
-  string email = 3;
-  string role = 4;
-  string photo = 5;
-  string created_time = 6;
-  string updated_time = 7;
+  fitness_center.user.UserObject user = 5;
 }
 
 message LogOutRequest {
   string refresh_token = 1;
-}
-message LogOutResponse {
-  bool ok = 1;
 }
 
 message RefreshRequest {
@@ -59,9 +50,9 @@ message RefreshRequest {
   string refresh_token = 2;
 }
 message RefreshResponse {
-  user user = 1;
-  string access_token = 2;
-  string refresh_token = 3;
-  string access_token_expiration = 4;
-  string refresh_token_expiration = 5;
+  string access_token = 1;
+  string refresh_token = 2;
+  string access_token_expiration = 3;
+  string refresh_token_expiration = 4;
+  fitness_center.user.UserObject user = 5;
 }

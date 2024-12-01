@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -31,7 +32,7 @@ const (
 type SSOClient interface {
 	SignUp(ctx context.Context, in *SignUpRequest, opts ...grpc.CallOption) (*SignUpResponse, error)
 	SignIn(ctx context.Context, in *SignInRequest, opts ...grpc.CallOption) (*SignInResponse, error)
-	LogOut(ctx context.Context, in *LogOutRequest, opts ...grpc.CallOption) (*LogOutResponse, error)
+	LogOut(ctx context.Context, in *LogOutRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Refresh(ctx context.Context, in *RefreshRequest, opts ...grpc.CallOption) (*RefreshResponse, error)
 }
 
@@ -63,9 +64,9 @@ func (c *sSOClient) SignIn(ctx context.Context, in *SignInRequest, opts ...grpc.
 	return out, nil
 }
 
-func (c *sSOClient) LogOut(ctx context.Context, in *LogOutRequest, opts ...grpc.CallOption) (*LogOutResponse, error) {
+func (c *sSOClient) LogOut(ctx context.Context, in *LogOutRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(LogOutResponse)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, SSO_LogOut_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -89,7 +90,7 @@ func (c *sSOClient) Refresh(ctx context.Context, in *RefreshRequest, opts ...grp
 type SSOServer interface {
 	SignUp(context.Context, *SignUpRequest) (*SignUpResponse, error)
 	SignIn(context.Context, *SignInRequest) (*SignInResponse, error)
-	LogOut(context.Context, *LogOutRequest) (*LogOutResponse, error)
+	LogOut(context.Context, *LogOutRequest) (*emptypb.Empty, error)
 	Refresh(context.Context, *RefreshRequest) (*RefreshResponse, error)
 	mustEmbedUnimplementedSSOServer()
 }
@@ -107,7 +108,7 @@ func (UnimplementedSSOServer) SignUp(context.Context, *SignUpRequest) (*SignUpRe
 func (UnimplementedSSOServer) SignIn(context.Context, *SignInRequest) (*SignInResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SignIn not implemented")
 }
-func (UnimplementedSSOServer) LogOut(context.Context, *LogOutRequest) (*LogOutResponse, error) {
+func (UnimplementedSSOServer) LogOut(context.Context, *LogOutRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LogOut not implemented")
 }
 func (UnimplementedSSOServer) Refresh(context.Context, *RefreshRequest) (*RefreshResponse, error) {
