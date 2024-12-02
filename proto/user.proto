@@ -4,6 +4,8 @@ package fitness_center.user;
 
 option go_package = "FitnessCenter.protobuf.user";
 
+import "google/protobuf/empty.proto";
+
 service User {
   rpc CreateUser (stream CreateUserRequest) returns (CreateUserResponse);
   rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
@@ -11,6 +13,7 @@ service User {
   rpc DeleteUserById (DeleteUserByIdRequest) returns (DeleteUserByIdResponse);
 
   rpc GetUserByEmail (GetUserByEmailRequest) returns (GetUserByEmailResponse);
+  rpc CheckPassword (CheckPasswordRequest) returns (google.protobuf.Empty);
 }
 
 message UserObject {
@@ -75,4 +78,9 @@ message GetUserByEmailRequest {
 }
 message GetUserByEmailResponse {
     UserObject userObject = 1;
+}
+
+message CheckPasswordRequest {
+  string userId = 1;
+  string password = 2;
 }

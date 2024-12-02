@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -24,6 +25,7 @@ const (
 	User_UpdateUser_FullMethodName     = "/fitness_center.user.User/UpdateUser"
 	User_DeleteUserById_FullMethodName = "/fitness_center.user.User/DeleteUserById"
 	User_GetUserByEmail_FullMethodName = "/fitness_center.user.User/GetUserByEmail"
+	User_CheckPassword_FullMethodName  = "/fitness_center.user.User/CheckPassword"
 )
 
 // UserClient is the client API for User service.
@@ -35,6 +37,7 @@ type UserClient interface {
 	UpdateUser(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UpdateUserRequest, UpdateUserResponse], error)
 	DeleteUserById(ctx context.Context, in *DeleteUserByIdRequest, opts ...grpc.CallOption) (*DeleteUserByIdResponse, error)
 	GetUserByEmail(ctx context.Context, in *GetUserByEmailRequest, opts ...grpc.CallOption) (*GetUserByEmailResponse, error)
+	CheckPassword(ctx context.Context, in *CheckPasswordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type userClient struct {
@@ -101,6 +104,16 @@ func (c *userClient) GetUserByEmail(ctx context.Context, in *GetUserByEmailReque
 	return out, nil
 }
 
+func (c *userClient) CheckPassword(ctx context.Context, in *CheckPasswordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, User_CheckPassword_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -110,6 +123,7 @@ type UserServer interface {
 	UpdateUser(grpc.ClientStreamingServer[UpdateUserRequest, UpdateUserResponse]) error
 	DeleteUserById(context.Context, *DeleteUserByIdRequest) (*DeleteUserByIdResponse, error)
 	GetUserByEmail(context.Context, *GetUserByEmailRequest) (*GetUserByEmailResponse, error)
+	CheckPassword(context.Context, *CheckPasswordRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -134,6 +148,9 @@ func (UnimplementedUserServer) DeleteUserById(context.Context, *DeleteUserByIdRe
 }
 func (UnimplementedUserServer) GetUserByEmail(context.Context, *GetUserByEmailRequest) (*GetUserByEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserByEmail not implemented")
+}
+func (UnimplementedUserServer) CheckPassword(context.Context, *CheckPasswordRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckPassword not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -224,6 +241,24 @@ func _User_GetUserByEmail_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_CheckPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).CheckPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_CheckPassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).CheckPassword(ctx, req.(*CheckPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -242,6 +277,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserByEmail",
 			Handler:    _User_GetUserByEmail_Handler,
+		},
+		{
+			MethodName: "CheckPassword",
+			Handler:    _User_CheckPassword_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
