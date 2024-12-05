@@ -71,5 +71,5 @@ message DeleteCoachByIdResponse {
 }
 
 message GetCoachesResponse {
-  repeated CoachObject coachObject = 1;
+  repeated CoachObject coachObjects = 1;
 }
