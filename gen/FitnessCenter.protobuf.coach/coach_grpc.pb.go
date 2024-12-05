@@ -31,7 +31,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CoachClient interface {
-	CreateCoach(ctx context.Context, in *CreateCoachRequest, opts ...grpc.CallOption) (*CreateCoachResponse, error)
+	CreateCoach(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[CreateCoachRequest, CreateCoachResponse], error)
 	GetCoachById(ctx context.Context, in *GetCoachByIdRequest, opts ...grpc.CallOption) (*GetCoachByIdResponse, error)
 	UpdateCoach(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UpdateCoachRequest, UpdateCoachResponse], error)
 	DeleteCoachById(ctx context.Context, in *DeleteCoachByIdRequest, opts ...grpc.CallOption) (*DeleteCoachByIdResponse, error)
@@ -46,15 +46,18 @@ func NewCoachClient(cc grpc.ClientConnInterface) CoachClient {
 	return &coachClient{cc}
 }
 
-func (c *coachClient) CreateCoach(ctx context.Context, in *CreateCoachRequest, opts ...grpc.CallOption) (*CreateCoachResponse, error) {
+func (c *coachClient) CreateCoach(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[CreateCoachRequest, CreateCoachResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateCoachResponse)
-	err := c.cc.Invoke(ctx, Coach_CreateCoach_FullMethodName, in, out, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Coach_ServiceDesc.Streams[0], Coach_CreateCoach_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &grpc.GenericClientStream[CreateCoachRequest, CreateCoachResponse]{ClientStream: stream}
+	return x, nil
 }
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Coach_CreateCoachClient = grpc.ClientStreamingClient[CreateCoachRequest, CreateCoachResponse]
 
 func (c *coachClient) GetCoachById(ctx context.Context, in *GetCoachByIdRequest, opts ...grpc.CallOption) (*GetCoachByIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -68,7 +71,7 @@ func (c *coachClient) GetCoachById(ctx context.Context, in *GetCoachByIdRequest,
 
 func (c *coachClient) UpdateCoach(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UpdateCoachRequest, UpdateCoachResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Coach_ServiceDesc.Streams[0], Coach_UpdateCoach_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Coach_ServiceDesc.Streams[1], Coach_UpdateCoach_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +106,7 @@ func (c *coachClient) GetCoaches(ctx context.Context, in *emptypb.Empty, opts ..
 // All implementations must embed UnimplementedCoachServer
 // for forward compatibility.
 type CoachServer interface {
-	CreateCoach(context.Context, *CreateCoachRequest) (*CreateCoachResponse, error)
+	CreateCoach(grpc.ClientStreamingServer[CreateCoachRequest, CreateCoachResponse]) error
 	GetCoachById(context.Context, *GetCoachByIdRequest) (*GetCoachByIdResponse, error)
 	UpdateCoach(grpc.ClientStreamingServer[UpdateCoachRequest, UpdateCoachResponse]) error
 	DeleteCoachById(context.Context, *DeleteCoachByIdRequest) (*DeleteCoachByIdResponse, error)
@@ -118,8 +121,8 @@ type CoachServer interface {
 // pointer dereference when methods are called.
 type UnimplementedCoachServer struct{}
 
-func (UnimplementedCoachServer) CreateCoach(context.Context, *CreateCoachRequest) (*CreateCoachResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateCoach not implemented")
+func (UnimplementedCoachServer) CreateCoach(grpc.ClientStreamingServer[CreateCoachRequest, CreateCoachResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method CreateCoach not implemented")
 }
 func (UnimplementedCoachServer) GetCoachById(context.Context, *GetCoachByIdRequest) (*GetCoachByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCoachById not implemented")
@@ -154,23 +157,12 @@ func RegisterCoachServer(s grpc.ServiceRegistrar, srv CoachServer) {
 	s.RegisterService(&Coach_ServiceDesc, srv)
 }
 
-func _Coach_CreateCoach_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateCoachRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoachServer).CreateCoach(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Coach_CreateCoach_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoachServer).CreateCoach(ctx, req.(*CreateCoachRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+func _Coach_CreateCoach_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(CoachServer).CreateCoach(&grpc.GenericServerStream[CreateCoachRequest, CreateCoachResponse]{ServerStream: stream})
 }
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type Coach_CreateCoachServer = grpc.ClientStreamingServer[CreateCoachRequest, CreateCoachResponse]
 
 func _Coach_GetCoachById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetCoachByIdRequest)
@@ -241,10 +233,6 @@ var Coach_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*CoachServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateCoach",
-			Handler:    _Coach_CreateCoach_Handler,
-		},
-		{
 			MethodName: "GetCoachById",
 			Handler:    _Coach_GetCoachById_Handler,
 		},
@@ -258,6 +246,11 @@ var Coach_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "CreateCoach",
+			Handler:       _Coach_CreateCoach_Handler,
+			ClientStreams: true,
+		},
 		{
 			StreamName:    "UpdateCoach",
 			Handler:       _Coach_UpdateCoach_Handler,

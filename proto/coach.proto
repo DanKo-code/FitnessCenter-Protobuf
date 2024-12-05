@@ -7,7 +7,7 @@ package fitness_center.coach;
 option go_package = "FitnessCenter.protobuf.coach";
 
 service Coach {
-  rpc CreateCoach (CreateCoachRequest) returns (CreateCoachResponse);
+  rpc CreateCoach (stream CreateCoachRequest) returns (CreateCoachResponse);
   rpc GetCoachById (GetCoachByIdRequest) returns (GetCoachByIdResponse);
   rpc UpdateCoach (stream UpdateCoachRequest) returns (UpdateCoachResponse);
   rpc DeleteCoachById (DeleteCoachByIdRequest) returns (DeleteCoachByIdResponse);
