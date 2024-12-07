@@ -7,7 +7,7 @@ package fitness_center.service;
 option go_package = "FitnessCenter.protobuf.service";
 
 service Service {
-  rpc CreateService (CreateServiceRequest) returns (CreateServiceResponse);
+  rpc CreateService (stream CreateServiceRequest) returns (CreateServiceResponse);
   rpc GetServiceById (GetServiceByIdRequest) returns (GetServiceByIdResponse);
   rpc UpdateService (stream UpdateServiceRequest) returns (UpdateServiceResponse);
   rpc DeleteServiceById (DeleteServiceByIdRequest) returns (DeleteServiceByIdResponse);
@@ -33,7 +33,7 @@ message ServiceDataForUpdate {
 
 message CoachService {
   string coachId = 1;
-  string serviceId = 2;
+  repeated string serviceId = 2;
 }
 
 message CreateServiceRequest {
@@ -75,9 +75,8 @@ message GetServicesResponse {
 }
 
 message CreateCoachServicesRequest {
-  string coachId = 1;
-  repeated string serviceId = 2;
+  CoachService coachService = 1;
 }
 message CreateCoachServicesResponse {
-  repeated CoachService coachService = 1;
+  CoachService coachService = 1;
 }
