@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package fitness_center.abonement;
+
+option go_package = "FitnessCenter.protobuf.abonement";
+
+service Abonement {
+  rpc CreateAbonement (stream CreateAbonementRequest) returns (CreateAbonementResponse);
+  rpc GetAbonementById (GetAbonementByIdRequest) returns (GetAbonementByIdResponse);
+  rpc UpdateAbonement (stream UpdateAbonementRequest) returns (UpdateAbonementResponse);
+  rpc DeleteAbonementById (DeleteAbonementByIdRequest) returns (DeleteAbonementByIdResponse);
+
+  rpc GetAbonements (google.protobuf.Empty) returns (GetAbonementsResponse);
+}
+
+message AbonementObject {
+  string id = 1;
+  string title = 2;
+  string validity = 3;
+  string visiting_time = 4;
+  string photo = 5;
+  int32 price = 6;
+  string created_time = 7;
+  string updated_time = 8;
+}
+
+message AbonementDataForCreate {
+  string title = 1;
+  string validity = 2;
+  string visiting_time = 3;
+  int32 price = 4;
+}
+message AbonementDataForUpdate {
+  string id = 1;
+  string title = 2;
+  string validity = 3;
+  string visiting_time = 4;
+  int32 price = 5;
+  string updated_time = 6;
+}
+
+message CreateAbonementRequest {
+  oneof payload {
+    AbonementDataForCreate abonementDataForCreate = 1;
+    bytes abonementPhoto = 2;
+  }
+}
+message CreateAbonementResponse {
+  AbonementObject abonementObject = 1;
+}
+
+message GetAbonementByIdRequest {
+  string id = 1;
+}
+message GetAbonementByIdResponse {
+  AbonementObject abonementObject = 1;
+}
+
+message UpdateAbonementRequest  {
+  oneof payload{
+    AbonementDataForUpdate abonementDataForUpdate = 1;
+    bytes abonementPhoto = 2;
+  }
+}
+message UpdateAbonementResponse  {
+  AbonementObject abonementObject = 1;
+}
+
+message DeleteAbonementByIdRequest {
+  string id = 1;
+}
+message DeleteAbonementByIdResponse {
+  AbonementObject abonementObject = 1;
+}
+
+message GetAbonementsResponse {
+  repeated AbonementObject AbonementObjects = 1;
+}

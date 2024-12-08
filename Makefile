@@ -10,5 +10,8 @@ generate_coach:
 generate_service:
 	@protoc -I ./proto service.proto --go_out=./gen --go-grpc_out=./gen
 
-generate_all: generate_sso generate_user generate_coach generate_service
+generate_abonement:
+	@protoc -I ./proto abonement.proto --go_out=./gen --go-grpc_out=./gen
+
+generate_all: generate_sso generate_user generate_coach generate_service generate_abonement
 	@echo "All proto file have been generated"
