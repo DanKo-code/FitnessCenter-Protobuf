@@ -11,7 +11,6 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -20,24 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Review_CreateReview_FullMethodName       = "/fitness_center.review.Review/CreateReview"
-	Review_GetReviewById_FullMethodName      = "/fitness_center.review.Review/GetReviewById"
-	Review_UpdateReview_FullMethodName       = "/fitness_center.review.Review/UpdateReview"
-	Review_DeleteReviewById_FullMethodName   = "/fitness_center.review.Review/DeleteReviewById"
-	Review_GetReviews_FullMethodName         = "/fitness_center.review.Review/GetReviews"
-	Review_CreateCoachReviews_FullMethodName = "/fitness_center.review.Review/CreateCoachReviews"
+	Review_CreateCoachReview_FullMethodName = "/fitness_center.review.Review/CreateCoachReview"
+	Review_GetReviewById_FullMethodName     = "/fitness_center.review.Review/GetReviewById"
+	Review_UpdateReview_FullMethodName      = "/fitness_center.review.Review/UpdateReview"
+	Review_DeleteReviewById_FullMethodName  = "/fitness_center.review.Review/DeleteReviewById"
+	Review_GetCoachReviews_FullMethodName   = "/fitness_center.review.Review/GetCoachReviews"
 )
 
 // ReviewClient is the client API for Review service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ReviewClient interface {
-	CreateReview(ctx context.Context, in *CreateReviewRequest, opts ...grpc.CallOption) (*CreateReviewResponse, error)
+	CreateCoachReview(ctx context.Context, in *CreateCoachReviewRequest, opts ...grpc.CallOption) (*CreateCoachReviewResponse, error)
 	GetReviewById(ctx context.Context, in *GetReviewByIdRequest, opts ...grpc.CallOption) (*GetReviewByIdResponse, error)
 	UpdateReview(ctx context.Context, in *UpdateReviewRequest, opts ...grpc.CallOption) (*UpdateReviewResponse, error)
 	DeleteReviewById(ctx context.Context, in *DeleteReviewByIdRequest, opts ...grpc.CallOption) (*DeleteReviewByIdResponse, error)
-	GetReviews(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetReviewsResponse, error)
-	CreateCoachReviews(ctx context.Context, in *CreateCoachReviewsRequest, opts ...grpc.CallOption) (*CreateCoachReviewsResponse, error)
+	GetCoachReviews(ctx context.Context, in *GetCoachReviewsRequest, opts ...grpc.CallOption) (*GetCoachReviewsResponse, error)
 }
 
 type reviewClient struct {
@@ -48,10 +45,10 @@ func NewReviewClient(cc grpc.ClientConnInterface) ReviewClient {
 	return &reviewClient{cc}
 }
 
-func (c *reviewClient) CreateReview(ctx context.Context, in *CreateReviewRequest, opts ...grpc.CallOption) (*CreateReviewResponse, error) {
+func (c *reviewClient) CreateCoachReview(ctx context.Context, in *CreateCoachReviewRequest, opts ...grpc.CallOption) (*CreateCoachReviewResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateReviewResponse)
-	err := c.cc.Invoke(ctx, Review_CreateReview_FullMethodName, in, out, cOpts...)
+	out := new(CreateCoachReviewResponse)
+	err := c.cc.Invoke(ctx, Review_CreateCoachReview_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -88,20 +85,10 @@ func (c *reviewClient) DeleteReviewById(ctx context.Context, in *DeleteReviewByI
 	return out, nil
 }
 
-func (c *reviewClient) GetReviews(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetReviewsResponse, error) {
+func (c *reviewClient) GetCoachReviews(ctx context.Context, in *GetCoachReviewsRequest, opts ...grpc.CallOption) (*GetCoachReviewsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetReviewsResponse)
-	err := c.cc.Invoke(ctx, Review_GetReviews_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *reviewClient) CreateCoachReviews(ctx context.Context, in *CreateCoachReviewsRequest, opts ...grpc.CallOption) (*CreateCoachReviewsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateCoachReviewsResponse)
-	err := c.cc.Invoke(ctx, Review_CreateCoachReviews_FullMethodName, in, out, cOpts...)
+	out := new(GetCoachReviewsResponse)
+	err := c.cc.Invoke(ctx, Review_GetCoachReviews_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -112,12 +99,11 @@ func (c *reviewClient) CreateCoachReviews(ctx context.Context, in *CreateCoachRe
 // All implementations must embed UnimplementedReviewServer
 // for forward compatibility.
 type ReviewServer interface {
-	CreateReview(context.Context, *CreateReviewRequest) (*CreateReviewResponse, error)
+	CreateCoachReview(context.Context, *CreateCoachReviewRequest) (*CreateCoachReviewResponse, error)
 	GetReviewById(context.Context, *GetReviewByIdRequest) (*GetReviewByIdResponse, error)
 	UpdateReview(context.Context, *UpdateReviewRequest) (*UpdateReviewResponse, error)
 	DeleteReviewById(context.Context, *DeleteReviewByIdRequest) (*DeleteReviewByIdResponse, error)
-	GetReviews(context.Context, *emptypb.Empty) (*GetReviewsResponse, error)
-	CreateCoachReviews(context.Context, *CreateCoachReviewsRequest) (*CreateCoachReviewsResponse, error)
+	GetCoachReviews(context.Context, *GetCoachReviewsRequest) (*GetCoachReviewsResponse, error)
 	mustEmbedUnimplementedReviewServer()
 }
 
@@ -128,8 +114,8 @@ type ReviewServer interface {
 // pointer dereference when methods are called.
 type UnimplementedReviewServer struct{}
 
-func (UnimplementedReviewServer) CreateReview(context.Context, *CreateReviewRequest) (*CreateReviewResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateReview not implemented")
+func (UnimplementedReviewServer) CreateCoachReview(context.Context, *CreateCoachReviewRequest) (*CreateCoachReviewResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCoachReview not implemented")
 }
 func (UnimplementedReviewServer) GetReviewById(context.Context, *GetReviewByIdRequest) (*GetReviewByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReviewById not implemented")
@@ -140,11 +126,8 @@ func (UnimplementedReviewServer) UpdateReview(context.Context, *UpdateReviewRequ
 func (UnimplementedReviewServer) DeleteReviewById(context.Context, *DeleteReviewByIdRequest) (*DeleteReviewByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteReviewById not implemented")
 }
-func (UnimplementedReviewServer) GetReviews(context.Context, *emptypb.Empty) (*GetReviewsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetReviews not implemented")
-}
-func (UnimplementedReviewServer) CreateCoachReviews(context.Context, *CreateCoachReviewsRequest) (*CreateCoachReviewsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateCoachReviews not implemented")
+func (UnimplementedReviewServer) GetCoachReviews(context.Context, *GetCoachReviewsRequest) (*GetCoachReviewsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCoachReviews not implemented")
 }
 func (UnimplementedReviewServer) mustEmbedUnimplementedReviewServer() {}
 func (UnimplementedReviewServer) testEmbeddedByValue()                {}
@@ -167,20 +150,20 @@ func RegisterReviewServer(s grpc.ServiceRegistrar, srv ReviewServer) {
 	s.RegisterService(&Review_ServiceDesc, srv)
 }
 
-func _Review_CreateReview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateReviewRequest)
+func _Review_CreateCoachReview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCoachReviewRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReviewServer).CreateReview(ctx, in)
+		return srv.(ReviewServer).CreateCoachReview(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Review_CreateReview_FullMethodName,
+		FullMethod: Review_CreateCoachReview_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReviewServer).CreateReview(ctx, req.(*CreateReviewRequest))
+		return srv.(ReviewServer).CreateCoachReview(ctx, req.(*CreateCoachReviewRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -239,38 +222,20 @@ func _Review_DeleteReviewById_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Review_GetReviews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+func _Review_GetCoachReviews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCoachReviewsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReviewServer).GetReviews(ctx, in)
+		return srv.(ReviewServer).GetCoachReviews(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Review_GetReviews_FullMethodName,
+		FullMethod: Review_GetCoachReviews_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReviewServer).GetReviews(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Review_CreateCoachReviews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateCoachReviewsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ReviewServer).CreateCoachReviews(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Review_CreateCoachReviews_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReviewServer).CreateCoachReviews(ctx, req.(*CreateCoachReviewsRequest))
+		return srv.(ReviewServer).GetCoachReviews(ctx, req.(*GetCoachReviewsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -283,8 +248,8 @@ var Review_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ReviewServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateReview",
-			Handler:    _Review_CreateReview_Handler,
+			MethodName: "CreateCoachReview",
+			Handler:    _Review_CreateCoachReview_Handler,
 		},
 		{
 			MethodName: "GetReviewById",
@@ -299,12 +264,8 @@ var Review_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Review_DeleteReviewById_Handler,
 		},
 		{
-			MethodName: "GetReviews",
-			Handler:    _Review_GetReviews_Handler,
-		},
-		{
-			MethodName: "CreateCoachReviews",
-			Handler:    _Review_CreateCoachReviews_Handler,
+			MethodName: "GetCoachReviews",
+			Handler:    _Review_GetCoachReviews_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
