@@ -26,6 +26,9 @@ message ReviewObject {
 message ReviewDataForCreate {
   string user_id = 1;
   string comment_body = 2;
+  oneof entity_id {
+    string coach_id = 3;
+  }
 }
 message ReviewDataForUpdate {
   string id = 1;
