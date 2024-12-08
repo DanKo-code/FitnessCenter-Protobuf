@@ -14,6 +14,7 @@ service Service {
 
   rpc GetServices (google.protobuf.Empty) returns (GetServicesResponse);
   rpc CreateCoachServices (CreateCoachServicesRequest) returns (CreateCoachServicesResponse);
+  rpc CreateAbonementServices (CreateAbonementServicesRequest) returns (CreateAbonementServicesResponse);
 }
 
 message ServiceObject {
@@ -34,6 +35,10 @@ message ServiceDataForUpdate {
 
 message CoachService {
   string coachId = 1;
+  repeated string serviceId = 2;
+}
+message AbonementService {
+  string abonementId = 1;
   repeated string serviceId = 2;
 }
 
@@ -80,4 +85,11 @@ message CreateCoachServicesRequest {
 }
 message CreateCoachServicesResponse {
   CoachService coachService = 1;
+}
+
+message CreateAbonementServicesRequest {
+  AbonementService abonementService = 1;
+}
+message CreateAbonementServicesResponse {
+  AbonementService abonementService = 1;
 }
