@@ -15,9 +15,10 @@ service Review {
 
 message ReviewObject {
   string id = 1;
-  string body = 2;
-  string created_time = 3;
-  string updated_time = 4;
+  string user_id = 2;
+  string body = 3;
+  string created_time = 4;
+  string updated_time = 5;
 }
 
 message CoachReviewDataForCreate {
