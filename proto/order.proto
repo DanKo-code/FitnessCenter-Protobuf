@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package fitness_center.order;
+
+option go_package = "FitnessCenter.protobuf.order";
+
+service Order {
+  rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse);
+
+  rpc GetUserOrders (GetUserOrdersRequest) returns (GetUserOrdersResponse);
+}
+
+message OrderObject {
+  string id = 1;
+  string user_id = 2;
+  string abonement_id = 3;
+  string status = 4;
+  string created_time = 5;
+  string updated_time = 6;
+}
+
+message OrderDataForCreate {
+  string user_id = 1;
+  string abonement_id = 2;
+}
+
+message CreateOrderRequest {
+  OrderDataForCreate orderDataForCreate = 1;
+}
+message CreateOrderResponse {
+    OrderObject orderObject = 1;
+}
+
+message GetUserOrdersRequest {
+  string user_id = 1;
+}
+message GetUserOrdersResponse {
+    repeated OrderObject userObjects = 1;
+}
