@@ -27,7 +27,6 @@ message CoachReviewDataForCreate {
 }
 message ReviewDataForUpdate {
   string id = 1;
-  string user_id = 2;
   string body = 3;
 }
 
