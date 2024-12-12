@@ -27,7 +27,7 @@ const (
 	Service_GetServices_FullMethodName             = "/fitness_center.service.Service/GetServices"
 	Service_CreateCoachServices_FullMethodName     = "/fitness_center.service.Service/CreateCoachServices"
 	Service_CreateAbonementServices_FullMethodName = "/fitness_center.service.Service/CreateAbonementServices"
-	Service_GetAbonementServices_FullMethodName    = "/fitness_center.service.Service/GetAbonementServices"
+	Service_GetAbonementsServices_FullMethodName   = "/fitness_center.service.Service/GetAbonementsServices"
 )
 
 // ServiceClient is the client API for Service service.
@@ -41,7 +41,7 @@ type ServiceClient interface {
 	GetServices(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetServicesResponse, error)
 	CreateCoachServices(ctx context.Context, in *CreateCoachServicesRequest, opts ...grpc.CallOption) (*CreateCoachServicesResponse, error)
 	CreateAbonementServices(ctx context.Context, in *CreateAbonementServicesRequest, opts ...grpc.CallOption) (*CreateAbonementServicesResponse, error)
-	GetAbonementServices(ctx context.Context, in *GetAbonementServicesRequest, opts ...grpc.CallOption) (*GetAbonementServicesResponse, error)
+	GetAbonementsServices(ctx context.Context, in *GetAbonementsServicesRequest, opts ...grpc.CallOption) (*GetAbonementsServicesResponse, error)
 }
 
 type serviceClient struct {
@@ -128,10 +128,10 @@ func (c *serviceClient) CreateAbonementServices(ctx context.Context, in *CreateA
 	return out, nil
 }
 
-func (c *serviceClient) GetAbonementServices(ctx context.Context, in *GetAbonementServicesRequest, opts ...grpc.CallOption) (*GetAbonementServicesResponse, error) {
+func (c *serviceClient) GetAbonementsServices(ctx context.Context, in *GetAbonementsServicesRequest, opts ...grpc.CallOption) (*GetAbonementsServicesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAbonementServicesResponse)
-	err := c.cc.Invoke(ctx, Service_GetAbonementServices_FullMethodName, in, out, cOpts...)
+	out := new(GetAbonementsServicesResponse)
+	err := c.cc.Invoke(ctx, Service_GetAbonementsServices_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -149,7 +149,7 @@ type ServiceServer interface {
 	GetServices(context.Context, *emptypb.Empty) (*GetServicesResponse, error)
 	CreateCoachServices(context.Context, *CreateCoachServicesRequest) (*CreateCoachServicesResponse, error)
 	CreateAbonementServices(context.Context, *CreateAbonementServicesRequest) (*CreateAbonementServicesResponse, error)
-	GetAbonementServices(context.Context, *GetAbonementServicesRequest) (*GetAbonementServicesResponse, error)
+	GetAbonementsServices(context.Context, *GetAbonementsServicesRequest) (*GetAbonementsServicesResponse, error)
 	mustEmbedUnimplementedServiceServer()
 }
 
@@ -181,8 +181,8 @@ func (UnimplementedServiceServer) CreateCoachServices(context.Context, *CreateCo
 func (UnimplementedServiceServer) CreateAbonementServices(context.Context, *CreateAbonementServicesRequest) (*CreateAbonementServicesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAbonementServices not implemented")
 }
-func (UnimplementedServiceServer) GetAbonementServices(context.Context, *GetAbonementServicesRequest) (*GetAbonementServicesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAbonementServices not implemented")
+func (UnimplementedServiceServer) GetAbonementsServices(context.Context, *GetAbonementsServicesRequest) (*GetAbonementsServicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAbonementsServices not implemented")
 }
 func (UnimplementedServiceServer) mustEmbedUnimplementedServiceServer() {}
 func (UnimplementedServiceServer) testEmbeddedByValue()                 {}
@@ -309,20 +309,20 @@ func _Service_CreateAbonementServices_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_GetAbonementServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAbonementServicesRequest)
+func _Service_GetAbonementsServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAbonementsServicesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).GetAbonementServices(ctx, in)
+		return srv.(ServiceServer).GetAbonementsServices(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Service_GetAbonementServices_FullMethodName,
+		FullMethod: Service_GetAbonementsServices_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).GetAbonementServices(ctx, req.(*GetAbonementServicesRequest))
+		return srv.(ServiceServer).GetAbonementsServices(ctx, req.(*GetAbonementsServicesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -355,8 +355,8 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Service_CreateAbonementServices_Handler,
 		},
 		{
-			MethodName: "GetAbonementServices",
-			Handler:    _Service_GetAbonementServices_Handler,
+			MethodName: "GetAbonementsServices",
+			Handler:    _Service_GetAbonementsServices_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
