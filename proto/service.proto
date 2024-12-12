@@ -25,6 +25,10 @@ message ServiceObject {
   string created_time = 4;
   string updated_time = 5;
 }
+message AbonementIdWithServices{
+  string abonementId = 1;
+  repeated ServiceObject serviceObjects = 2;
+}
 
 message ServiceDataForCreate {
   string title = 1;
@@ -99,5 +103,5 @@ message GetAbonementsServicesRequest {
   repeated string abonementIds = 1;
 }
 message GetAbonementsServicesResponse {
-  repeated ServiceObject serviceObjects = 1 ;
+  repeated AbonementIdWithServices abonementIdsWithServices = 1 ;
 }
