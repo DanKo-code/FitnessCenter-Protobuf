@@ -955,6 +955,96 @@ func (x *CreateAbonementServicesResponse) GetAbonementService() *AbonementServic
 	return nil
 }
 
+type GetAbonementServicesRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AbonementId string `protobuf:"bytes,1,opt,name=abonementId,proto3" json:"abonementId,omitempty"`
+}
+
+func (x *GetAbonementServicesRequest) Reset() {
+	*x = GetAbonementServicesRequest{}
+	mi := &file_service_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAbonementServicesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAbonementServicesRequest) ProtoMessage() {}
+
+func (x *GetAbonementServicesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAbonementServicesRequest.ProtoReflect.Descriptor instead.
+func (*GetAbonementServicesRequest) Descriptor() ([]byte, []int) {
+	return file_service_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *GetAbonementServicesRequest) GetAbonementId() string {
+	if x != nil {
+		return x.AbonementId
+	}
+	return ""
+}
+
+type GetAbonementServicesResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ServiceObjects []*ServiceObject `protobuf:"bytes,1,rep,name=serviceObjects,proto3" json:"serviceObjects,omitempty"`
+}
+
+func (x *GetAbonementServicesResponse) Reset() {
+	*x = GetAbonementServicesResponse{}
+	mi := &file_service_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAbonementServicesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAbonementServicesResponse) ProtoMessage() {}
+
+func (x *GetAbonementServicesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_service_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAbonementServicesResponse.ProtoReflect.Descriptor instead.
+func (*GetAbonementServicesResponse) Descriptor() ([]byte, []int) {
+	return file_service_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *GetAbonementServicesResponse) GetServiceObjects() []*ServiceObject {
+	if x != nil {
+		return x.ServiceObjects
+	}
+	return nil
+}
+
 var File_service_proto protoreflect.FileDescriptor
 
 var file_service_proto_rawDesc = []byte{
@@ -1075,7 +1165,18 @@ var file_service_proto_rawDesc = []byte{
 	0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
 	0x65, 0x2e, 0x41, 0x62, 0x6f, 0x6e, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69,
 	0x63, 0x65, 0x52, 0x10, 0x61, 0x62, 0x6f, 0x6e, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x72,
-	0x76, 0x69, 0x63, 0x65, 0x32, 0xb5, 0x06, 0x0a, 0x07, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x76, 0x69, 0x63, 0x65, 0x22, 0x3f, 0x0a, 0x1b, 0x47, 0x65, 0x74, 0x41, 0x62, 0x6f, 0x6e, 0x65,
+	0x6d, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x12, 0x20, 0x0a, 0x0b, 0x61, 0x62, 0x6f, 0x6e, 0x65, 0x6d, 0x65, 0x6e, 0x74,
+	0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x61, 0x62, 0x6f, 0x6e, 0x65, 0x6d,
+	0x65, 0x6e, 0x74, 0x49, 0x64, 0x22, 0x6d, 0x0a, 0x1c, 0x47, 0x65, 0x74, 0x41, 0x62, 0x6f, 0x6e,
+	0x65, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4d, 0x0a, 0x0e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x25, 0x2e,
+	0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x4f, 0x62,
+	0x6a, 0x65, 0x63, 0x74, 0x52, 0x0e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x4f, 0x62, 0x6a,
+	0x65, 0x63, 0x74, 0x73, 0x32, 0xb9, 0x07, 0x0a, 0x07, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
 	0x12, 0x6e, 0x0a, 0x0d, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
 	0x65, 0x12, 0x2c, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74,
 	0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74,
@@ -1126,10 +1227,18 @@ var file_service_proto_rawDesc = []byte{
 	0x65, 0x73, 0x74, 0x1a, 0x37, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65,
 	0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x72, 0x65,
 	0x61, 0x74, 0x65, 0x41, 0x62, 0x6f, 0x6e, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76,
-	0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x20, 0x5a, 0x1e,
-	0x46, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x43, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x81, 0x01, 0x0a,
+	0x14, 0x47, 0x65, 0x74, 0x41, 0x62, 0x6f, 0x6e, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x73, 0x12, 0x33, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f,
+	0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x47,
+	0x65, 0x74, 0x41, 0x62, 0x6f, 0x6e, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x34, 0x2e, 0x66, 0x69, 0x74,
+	0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x41, 0x62, 0x6f, 0x6e, 0x65, 0x6d, 0x65, 0x6e, 0x74,
+	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x42, 0x20, 0x5a, 0x1e, 0x46, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x43, 0x65, 0x6e, 0x74, 0x65,
+	0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1144,7 +1253,7 @@ func file_service_proto_rawDescGZIP() []byte {
 	return file_service_proto_rawDescData
 }
 
-var file_service_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_service_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_service_proto_goTypes = []any{
 	(*ServiceObject)(nil),                   // 0: fitness_center.service.ServiceObject
 	(*ServiceDataForCreate)(nil),            // 1: fitness_center.service.ServiceDataForCreate
@@ -1164,7 +1273,9 @@ var file_service_proto_goTypes = []any{
 	(*CreateCoachServicesResponse)(nil),     // 15: fitness_center.service.CreateCoachServicesResponse
 	(*CreateAbonementServicesRequest)(nil),  // 16: fitness_center.service.CreateAbonementServicesRequest
 	(*CreateAbonementServicesResponse)(nil), // 17: fitness_center.service.CreateAbonementServicesResponse
-	(*emptypb.Empty)(nil),                   // 18: google.protobuf.Empty
+	(*GetAbonementServicesRequest)(nil),     // 18: fitness_center.service.GetAbonementServicesRequest
+	(*GetAbonementServicesResponse)(nil),    // 19: fitness_center.service.GetAbonementServicesResponse
+	(*emptypb.Empty)(nil),                   // 20: google.protobuf.Empty
 }
 var file_service_proto_depIdxs = []int32{
 	1,  // 0: fitness_center.service.CreateServiceRequest.serviceDataForCreate:type_name -> fitness_center.service.ServiceDataForCreate
@@ -1178,25 +1289,28 @@ var file_service_proto_depIdxs = []int32{
 	3,  // 8: fitness_center.service.CreateCoachServicesResponse.coachService:type_name -> fitness_center.service.CoachService
 	4,  // 9: fitness_center.service.CreateAbonementServicesRequest.abonementService:type_name -> fitness_center.service.AbonementService
 	4,  // 10: fitness_center.service.CreateAbonementServicesResponse.abonementService:type_name -> fitness_center.service.AbonementService
-	5,  // 11: fitness_center.service.Service.CreateService:input_type -> fitness_center.service.CreateServiceRequest
-	7,  // 12: fitness_center.service.Service.GetServiceById:input_type -> fitness_center.service.GetServiceByIdRequest
-	9,  // 13: fitness_center.service.Service.UpdateService:input_type -> fitness_center.service.UpdateServiceRequest
-	11, // 14: fitness_center.service.Service.DeleteServiceById:input_type -> fitness_center.service.DeleteServiceByIdRequest
-	18, // 15: fitness_center.service.Service.GetServices:input_type -> google.protobuf.Empty
-	14, // 16: fitness_center.service.Service.CreateCoachServices:input_type -> fitness_center.service.CreateCoachServicesRequest
-	16, // 17: fitness_center.service.Service.CreateAbonementServices:input_type -> fitness_center.service.CreateAbonementServicesRequest
-	6,  // 18: fitness_center.service.Service.CreateService:output_type -> fitness_center.service.CreateServiceResponse
-	8,  // 19: fitness_center.service.Service.GetServiceById:output_type -> fitness_center.service.GetServiceByIdResponse
-	10, // 20: fitness_center.service.Service.UpdateService:output_type -> fitness_center.service.UpdateServiceResponse
-	12, // 21: fitness_center.service.Service.DeleteServiceById:output_type -> fitness_center.service.DeleteServiceByIdResponse
-	13, // 22: fitness_center.service.Service.GetServices:output_type -> fitness_center.service.GetServicesResponse
-	15, // 23: fitness_center.service.Service.CreateCoachServices:output_type -> fitness_center.service.CreateCoachServicesResponse
-	17, // 24: fitness_center.service.Service.CreateAbonementServices:output_type -> fitness_center.service.CreateAbonementServicesResponse
-	18, // [18:25] is the sub-list for method output_type
-	11, // [11:18] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	0,  // 11: fitness_center.service.GetAbonementServicesResponse.serviceObjects:type_name -> fitness_center.service.ServiceObject
+	5,  // 12: fitness_center.service.Service.CreateService:input_type -> fitness_center.service.CreateServiceRequest
+	7,  // 13: fitness_center.service.Service.GetServiceById:input_type -> fitness_center.service.GetServiceByIdRequest
+	9,  // 14: fitness_center.service.Service.UpdateService:input_type -> fitness_center.service.UpdateServiceRequest
+	11, // 15: fitness_center.service.Service.DeleteServiceById:input_type -> fitness_center.service.DeleteServiceByIdRequest
+	20, // 16: fitness_center.service.Service.GetServices:input_type -> google.protobuf.Empty
+	14, // 17: fitness_center.service.Service.CreateCoachServices:input_type -> fitness_center.service.CreateCoachServicesRequest
+	16, // 18: fitness_center.service.Service.CreateAbonementServices:input_type -> fitness_center.service.CreateAbonementServicesRequest
+	18, // 19: fitness_center.service.Service.GetAbonementServices:input_type -> fitness_center.service.GetAbonementServicesRequest
+	6,  // 20: fitness_center.service.Service.CreateService:output_type -> fitness_center.service.CreateServiceResponse
+	8,  // 21: fitness_center.service.Service.GetServiceById:output_type -> fitness_center.service.GetServiceByIdResponse
+	10, // 22: fitness_center.service.Service.UpdateService:output_type -> fitness_center.service.UpdateServiceResponse
+	12, // 23: fitness_center.service.Service.DeleteServiceById:output_type -> fitness_center.service.DeleteServiceByIdResponse
+	13, // 24: fitness_center.service.Service.GetServices:output_type -> fitness_center.service.GetServicesResponse
+	15, // 25: fitness_center.service.Service.CreateCoachServices:output_type -> fitness_center.service.CreateCoachServicesResponse
+	17, // 26: fitness_center.service.Service.CreateAbonementServices:output_type -> fitness_center.service.CreateAbonementServicesResponse
+	19, // 27: fitness_center.service.Service.GetAbonementServices:output_type -> fitness_center.service.GetAbonementServicesResponse
+	20, // [20:28] is the sub-list for method output_type
+	12, // [12:20] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_service_proto_init() }
@@ -1218,7 +1332,7 @@ func file_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_service_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
