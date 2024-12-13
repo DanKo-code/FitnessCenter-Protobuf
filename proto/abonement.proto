@@ -87,5 +87,5 @@ message GetAbonementsResponse {
 }
 
 message GetAbonementsWithServicesResponse {
-    AbonementWithServices abonementWithServices = 1;
+    repeated AbonementWithServices abonementWithServices = 1;
 }
