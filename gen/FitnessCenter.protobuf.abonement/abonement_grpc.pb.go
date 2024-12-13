@@ -20,11 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Abonement_CreateAbonement_FullMethodName     = "/fitness_center.abonement.Abonement/CreateAbonement"
-	Abonement_GetAbonementById_FullMethodName    = "/fitness_center.abonement.Abonement/GetAbonementById"
-	Abonement_UpdateAbonement_FullMethodName     = "/fitness_center.abonement.Abonement/UpdateAbonement"
-	Abonement_DeleteAbonementById_FullMethodName = "/fitness_center.abonement.Abonement/DeleteAbonementById"
-	Abonement_GetAbonements_FullMethodName       = "/fitness_center.abonement.Abonement/GetAbonements"
+	Abonement_CreateAbonement_FullMethodName           = "/fitness_center.abonement.Abonement/CreateAbonement"
+	Abonement_GetAbonementById_FullMethodName          = "/fitness_center.abonement.Abonement/GetAbonementById"
+	Abonement_UpdateAbonement_FullMethodName           = "/fitness_center.abonement.Abonement/UpdateAbonement"
+	Abonement_DeleteAbonementById_FullMethodName       = "/fitness_center.abonement.Abonement/DeleteAbonementById"
+	Abonement_GetAbonements_FullMethodName             = "/fitness_center.abonement.Abonement/GetAbonements"
+	Abonement_GetAbonementsWithServices_FullMethodName = "/fitness_center.abonement.Abonement/GetAbonementsWithServices"
 )
 
 // AbonementClient is the client API for Abonement service.
@@ -36,6 +37,7 @@ type AbonementClient interface {
 	UpdateAbonement(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UpdateAbonementRequest, UpdateAbonementResponse], error)
 	DeleteAbonementById(ctx context.Context, in *DeleteAbonementByIdRequest, opts ...grpc.CallOption) (*DeleteAbonementByIdResponse, error)
 	GetAbonements(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAbonementsResponse, error)
+	GetAbonementsWithServices(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAbonementsWithServicesResponse, error)
 }
 
 type abonementClient struct {
@@ -102,6 +104,16 @@ func (c *abonementClient) GetAbonements(ctx context.Context, in *emptypb.Empty, 
 	return out, nil
 }
 
+func (c *abonementClient) GetAbonementsWithServices(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAbonementsWithServicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAbonementsWithServicesResponse)
+	err := c.cc.Invoke(ctx, Abonement_GetAbonementsWithServices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AbonementServer is the server API for Abonement service.
 // All implementations must embed UnimplementedAbonementServer
 // for forward compatibility.
@@ -111,6 +123,7 @@ type AbonementServer interface {
 	UpdateAbonement(grpc.ClientStreamingServer[UpdateAbonementRequest, UpdateAbonementResponse]) error
 	DeleteAbonementById(context.Context, *DeleteAbonementByIdRequest) (*DeleteAbonementByIdResponse, error)
 	GetAbonements(context.Context, *emptypb.Empty) (*GetAbonementsResponse, error)
+	GetAbonementsWithServices(context.Context, *emptypb.Empty) (*GetAbonementsWithServicesResponse, error)
 	mustEmbedUnimplementedAbonementServer()
 }
 
@@ -135,6 +148,9 @@ func (UnimplementedAbonementServer) DeleteAbonementById(context.Context, *Delete
 }
 func (UnimplementedAbonementServer) GetAbonements(context.Context, *emptypb.Empty) (*GetAbonementsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAbonements not implemented")
+}
+func (UnimplementedAbonementServer) GetAbonementsWithServices(context.Context, *emptypb.Empty) (*GetAbonementsWithServicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAbonementsWithServices not implemented")
 }
 func (UnimplementedAbonementServer) mustEmbedUnimplementedAbonementServer() {}
 func (UnimplementedAbonementServer) testEmbeddedByValue()                   {}
@@ -225,6 +241,24 @@ func _Abonement_GetAbonements_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Abonement_GetAbonementsWithServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AbonementServer).GetAbonementsWithServices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Abonement_GetAbonementsWithServices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AbonementServer).GetAbonementsWithServices(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Abonement_ServiceDesc is the grpc.ServiceDesc for Abonement service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -243,6 +277,10 @@ var Abonement_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAbonements",
 			Handler:    _Abonement_GetAbonements_Handler,
+		},
+		{
+			MethodName: "GetAbonementsWithServices",
+			Handler:    _Abonement_GetAbonementsWithServices_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

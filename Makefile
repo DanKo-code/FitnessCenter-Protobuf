@@ -11,7 +11,7 @@ generate_service:
 	@protoc -I ./proto service.proto --go_out=./gen --go-grpc_out=./gen
 
 generate_abonement:
-	@protoc -I ./proto abonement.proto --go_out=./gen --go-grpc_out=./gen
+	@protoc -I ./proto abonement.proto --go_out=./gen --go-grpc_out=./gen --go_opt=Mservice.proto=github.com/DanKo-code/FitnessCenter-Protobuf/gen/FitnessCenter.protobuf.service
 
 generate_review:
 	@protoc -I ./proto review.proto --go_out=./gen --go-grpc_out=./gen

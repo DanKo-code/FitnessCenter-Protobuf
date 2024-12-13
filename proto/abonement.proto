@@ -6,6 +6,8 @@ package fitness_center.abonement;
 
 option go_package = "FitnessCenter.protobuf.abonement";
 
+import "service.proto";
+
 service Abonement {
   rpc CreateAbonement (stream CreateAbonementRequest) returns (CreateAbonementResponse);
   rpc GetAbonementById (GetAbonementByIdRequest) returns (GetAbonementByIdResponse);
@@ -13,6 +15,7 @@ service Abonement {
   rpc DeleteAbonementById (DeleteAbonementByIdRequest) returns (DeleteAbonementByIdResponse);
 
   rpc GetAbonements (google.protobuf.Empty) returns (GetAbonementsResponse);
+  rpc GetAbonementsWithServices (google.protobuf.Empty) returns (GetAbonementsWithServicesResponse);
 }
 
 message AbonementObject {
@@ -24,6 +27,10 @@ message AbonementObject {
   int32 price = 6;
   string created_time = 7;
   string updated_time = 8;
+}
+message AbonementWithServices{
+    AbonementObject abonement = 1;
+    repeated service.ServiceObject services = 2;
 }
 
 message AbonementDataForCreate {
@@ -77,4 +84,8 @@ message DeleteAbonementByIdResponse {
 
 message GetAbonementsResponse {
   repeated AbonementObject AbonementObjects = 1;
+}
+
+message GetAbonementsWithServicesResponse {
+    AbonementWithServices abonementWithServices = 1;
 }
