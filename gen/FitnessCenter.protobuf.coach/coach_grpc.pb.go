@@ -20,11 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Coach_CreateCoach_FullMethodName     = "/fitness_center.coach.Coach/CreateCoach"
-	Coach_GetCoachById_FullMethodName    = "/fitness_center.coach.Coach/GetCoachById"
-	Coach_UpdateCoach_FullMethodName     = "/fitness_center.coach.Coach/UpdateCoach"
-	Coach_DeleteCoachById_FullMethodName = "/fitness_center.coach.Coach/DeleteCoachById"
-	Coach_GetCoaches_FullMethodName      = "/fitness_center.coach.Coach/GetCoaches"
+	Coach_CreateCoach_FullMethodName            = "/fitness_center.coach.Coach/CreateCoach"
+	Coach_GetCoachById_FullMethodName           = "/fitness_center.coach.Coach/GetCoachById"
+	Coach_UpdateCoach_FullMethodName            = "/fitness_center.coach.Coach/UpdateCoach"
+	Coach_DeleteCoachById_FullMethodName        = "/fitness_center.coach.Coach/DeleteCoachById"
+	Coach_GetCoaches_FullMethodName             = "/fitness_center.coach.Coach/GetCoaches"
+	Coach_GetCoachesWithServices_FullMethodName = "/fitness_center.coach.Coach/GetCoachesWithServices"
 )
 
 // CoachClient is the client API for Coach service.
@@ -36,6 +37,7 @@ type CoachClient interface {
 	UpdateCoach(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UpdateCoachRequest, UpdateCoachResponse], error)
 	DeleteCoachById(ctx context.Context, in *DeleteCoachByIdRequest, opts ...grpc.CallOption) (*DeleteCoachByIdResponse, error)
 	GetCoaches(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCoachesResponse, error)
+	GetCoachesWithServices(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCoachesWithServicesResponse, error)
 }
 
 type coachClient struct {
@@ -102,6 +104,16 @@ func (c *coachClient) GetCoaches(ctx context.Context, in *emptypb.Empty, opts ..
 	return out, nil
 }
 
+func (c *coachClient) GetCoachesWithServices(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCoachesWithServicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCoachesWithServicesResponse)
+	err := c.cc.Invoke(ctx, Coach_GetCoachesWithServices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoachServer is the server API for Coach service.
 // All implementations must embed UnimplementedCoachServer
 // for forward compatibility.
@@ -111,6 +123,7 @@ type CoachServer interface {
 	UpdateCoach(grpc.ClientStreamingServer[UpdateCoachRequest, UpdateCoachResponse]) error
 	DeleteCoachById(context.Context, *DeleteCoachByIdRequest) (*DeleteCoachByIdResponse, error)
 	GetCoaches(context.Context, *emptypb.Empty) (*GetCoachesResponse, error)
+	GetCoachesWithServices(context.Context, *emptypb.Empty) (*GetCoachesWithServicesResponse, error)
 	mustEmbedUnimplementedCoachServer()
 }
 
@@ -135,6 +148,9 @@ func (UnimplementedCoachServer) DeleteCoachById(context.Context, *DeleteCoachByI
 }
 func (UnimplementedCoachServer) GetCoaches(context.Context, *emptypb.Empty) (*GetCoachesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCoaches not implemented")
+}
+func (UnimplementedCoachServer) GetCoachesWithServices(context.Context, *emptypb.Empty) (*GetCoachesWithServicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCoachesWithServices not implemented")
 }
 func (UnimplementedCoachServer) mustEmbedUnimplementedCoachServer() {}
 func (UnimplementedCoachServer) testEmbeddedByValue()               {}
@@ -225,6 +241,24 @@ func _Coach_GetCoaches_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Coach_GetCoachesWithServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoachServer).GetCoachesWithServices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Coach_GetCoachesWithServices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoachServer).GetCoachesWithServices(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Coach_ServiceDesc is the grpc.ServiceDesc for Coach service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -243,6 +277,10 @@ var Coach_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCoaches",
 			Handler:    _Coach_GetCoaches_Handler,
+		},
+		{
+			MethodName: "GetCoachesWithServices",
+			Handler:    _Coach_GetCoachesWithServices_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

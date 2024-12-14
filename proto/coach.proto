@@ -6,6 +6,8 @@ package fitness_center.coach;
 
 option go_package = "FitnessCenter.protobuf.coach";
 
+import "service.proto";
+
 service Coach {
   rpc CreateCoach (stream CreateCoachRequest) returns (CreateCoachResponse);
   rpc GetCoachById (GetCoachByIdRequest) returns (GetCoachByIdResponse);
@@ -13,6 +15,7 @@ service Coach {
   rpc DeleteCoachById (DeleteCoachByIdRequest) returns (DeleteCoachByIdResponse);
 
   rpc GetCoaches (google.protobuf.Empty) returns (GetCoachesResponse);
+  rpc GetCoachesWithServices (google.protobuf.Empty) returns (GetCoachesWithServicesResponse);
 }
 
 message CoachObject {
@@ -22,6 +25,10 @@ message CoachObject {
   string photo = 4;
   string created_time = 5;
   string updated_time = 6;
+}
+message CoachWithServices{
+  CoachObject coach = 1;
+  repeated service.ServiceObject services = 2;
 }
 
 message CoachDataForCreate {
@@ -72,4 +79,8 @@ message DeleteCoachByIdResponse {
 
 message GetCoachesResponse {
   repeated CoachObject coachObjects = 1;
+}
+
+message GetCoachesWithServicesResponse {
+  repeated CoachWithServices coachesWithServices = 1;
 }
