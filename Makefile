@@ -5,7 +5,7 @@ generate_user:
 	@protoc -I ./proto user.proto --go_out=./gen --go-grpc_out=./gen
 
 generate_coach:
-	@protoc -I ./proto coach.proto --go_out=./gen --go-grpc_out=./gen --go_opt=Mservice.proto=github.com/DanKo-code/FitnessCenter-Protobuf/gen/FitnessCenter.protobuf.service
+	@protoc -I ./proto coach.proto --go_out=./gen --go-grpc_out=./gen --go_opt=Mservice.proto=github.com/DanKo-code/FitnessCenter-Protobuf/gen/FitnessCenter.protobuf.service --go_opt=Mreview.proto=github.com/DanKo-code/FitnessCenter-Protobuf/gen/FitnessCenter.protobuf.review --go_opt=Muser.proto=github.com/DanKo-code/FitnessCenter-Protobuf/gen/FitnessCenter.protobuf.user
 
 generate_service:
 	@protoc -I ./proto service.proto --go_out=./gen --go-grpc_out=./gen

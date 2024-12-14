@@ -20,12 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Coach_CreateCoach_FullMethodName            = "/fitness_center.coach.Coach/CreateCoach"
-	Coach_GetCoachById_FullMethodName           = "/fitness_center.coach.Coach/GetCoachById"
-	Coach_UpdateCoach_FullMethodName            = "/fitness_center.coach.Coach/UpdateCoach"
-	Coach_DeleteCoachById_FullMethodName        = "/fitness_center.coach.Coach/DeleteCoachById"
-	Coach_GetCoaches_FullMethodName             = "/fitness_center.coach.Coach/GetCoaches"
-	Coach_GetCoachesWithServices_FullMethodName = "/fitness_center.coach.Coach/GetCoachesWithServices"
+	Coach_CreateCoach_FullMethodName                                = "/fitness_center.coach.Coach/CreateCoach"
+	Coach_GetCoachById_FullMethodName                               = "/fitness_center.coach.Coach/GetCoachById"
+	Coach_UpdateCoach_FullMethodName                                = "/fitness_center.coach.Coach/UpdateCoach"
+	Coach_DeleteCoachById_FullMethodName                            = "/fitness_center.coach.Coach/DeleteCoachById"
+	Coach_GetCoaches_FullMethodName                                 = "/fitness_center.coach.Coach/GetCoaches"
+	Coach_GetCoachesWithServicesWithReviewsWithUsers_FullMethodName = "/fitness_center.coach.Coach/GetCoachesWithServicesWithReviewsWithUsers"
 )
 
 // CoachClient is the client API for Coach service.
@@ -37,7 +37,7 @@ type CoachClient interface {
 	UpdateCoach(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UpdateCoachRequest, UpdateCoachResponse], error)
 	DeleteCoachById(ctx context.Context, in *DeleteCoachByIdRequest, opts ...grpc.CallOption) (*DeleteCoachByIdResponse, error)
 	GetCoaches(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCoachesResponse, error)
-	GetCoachesWithServices(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCoachesWithServicesResponse, error)
+	GetCoachesWithServicesWithReviewsWithUsers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCoachesWithServicesWithReviewsWithUsersResponse, error)
 }
 
 type coachClient struct {
@@ -104,10 +104,10 @@ func (c *coachClient) GetCoaches(ctx context.Context, in *emptypb.Empty, opts ..
 	return out, nil
 }
 
-func (c *coachClient) GetCoachesWithServices(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCoachesWithServicesResponse, error) {
+func (c *coachClient) GetCoachesWithServicesWithReviewsWithUsers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCoachesWithServicesWithReviewsWithUsersResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetCoachesWithServicesResponse)
-	err := c.cc.Invoke(ctx, Coach_GetCoachesWithServices_FullMethodName, in, out, cOpts...)
+	out := new(GetCoachesWithServicesWithReviewsWithUsersResponse)
+	err := c.cc.Invoke(ctx, Coach_GetCoachesWithServicesWithReviewsWithUsers_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -123,7 +123,7 @@ type CoachServer interface {
 	UpdateCoach(grpc.ClientStreamingServer[UpdateCoachRequest, UpdateCoachResponse]) error
 	DeleteCoachById(context.Context, *DeleteCoachByIdRequest) (*DeleteCoachByIdResponse, error)
 	GetCoaches(context.Context, *emptypb.Empty) (*GetCoachesResponse, error)
-	GetCoachesWithServices(context.Context, *emptypb.Empty) (*GetCoachesWithServicesResponse, error)
+	GetCoachesWithServicesWithReviewsWithUsers(context.Context, *emptypb.Empty) (*GetCoachesWithServicesWithReviewsWithUsersResponse, error)
 	mustEmbedUnimplementedCoachServer()
 }
 
@@ -149,8 +149,8 @@ func (UnimplementedCoachServer) DeleteCoachById(context.Context, *DeleteCoachByI
 func (UnimplementedCoachServer) GetCoaches(context.Context, *emptypb.Empty) (*GetCoachesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCoaches not implemented")
 }
-func (UnimplementedCoachServer) GetCoachesWithServices(context.Context, *emptypb.Empty) (*GetCoachesWithServicesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCoachesWithServices not implemented")
+func (UnimplementedCoachServer) GetCoachesWithServicesWithReviewsWithUsers(context.Context, *emptypb.Empty) (*GetCoachesWithServicesWithReviewsWithUsersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCoachesWithServicesWithReviewsWithUsers not implemented")
 }
 func (UnimplementedCoachServer) mustEmbedUnimplementedCoachServer() {}
 func (UnimplementedCoachServer) testEmbeddedByValue()               {}
@@ -241,20 +241,20 @@ func _Coach_GetCoaches_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Coach_GetCoachesWithServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Coach_GetCoachesWithServicesWithReviewsWithUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CoachServer).GetCoachesWithServices(ctx, in)
+		return srv.(CoachServer).GetCoachesWithServicesWithReviewsWithUsers(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Coach_GetCoachesWithServices_FullMethodName,
+		FullMethod: Coach_GetCoachesWithServicesWithReviewsWithUsers_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoachServer).GetCoachesWithServices(ctx, req.(*emptypb.Empty))
+		return srv.(CoachServer).GetCoachesWithServicesWithReviewsWithUsers(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -279,8 +279,8 @@ var Coach_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Coach_GetCoaches_Handler,
 		},
 		{
-			MethodName: "GetCoachesWithServices",
-			Handler:    _Coach_GetCoachesWithServices_Handler,
+			MethodName: "GetCoachesWithServicesWithReviewsWithUsers",
+			Handler:    _Coach_GetCoachesWithServicesWithReviewsWithUsers_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
