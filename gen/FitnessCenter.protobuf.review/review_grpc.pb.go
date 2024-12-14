@@ -24,6 +24,7 @@ const (
 	Review_UpdateReview_FullMethodName      = "/fitness_center.review.Review/UpdateReview"
 	Review_DeleteReviewById_FullMethodName  = "/fitness_center.review.Review/DeleteReviewById"
 	Review_GetCoachReviews_FullMethodName   = "/fitness_center.review.Review/GetCoachReviews"
+	Review_GetCoachesReviews_FullMethodName = "/fitness_center.review.Review/GetCoachesReviews"
 )
 
 // ReviewClient is the client API for Review service.
@@ -35,6 +36,7 @@ type ReviewClient interface {
 	UpdateReview(ctx context.Context, in *UpdateReviewRequest, opts ...grpc.CallOption) (*UpdateReviewResponse, error)
 	DeleteReviewById(ctx context.Context, in *DeleteReviewByIdRequest, opts ...grpc.CallOption) (*DeleteReviewByIdResponse, error)
 	GetCoachReviews(ctx context.Context, in *GetCoachReviewsRequest, opts ...grpc.CallOption) (*GetCoachReviewsResponse, error)
+	GetCoachesReviews(ctx context.Context, in *GetCoachesReviewsRequest, opts ...grpc.CallOption) (*GetCoachesReviewsResponse, error)
 }
 
 type reviewClient struct {
@@ -95,6 +97,16 @@ func (c *reviewClient) GetCoachReviews(ctx context.Context, in *GetCoachReviewsR
 	return out, nil
 }
 
+func (c *reviewClient) GetCoachesReviews(ctx context.Context, in *GetCoachesReviewsRequest, opts ...grpc.CallOption) (*GetCoachesReviewsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCoachesReviewsResponse)
+	err := c.cc.Invoke(ctx, Review_GetCoachesReviews_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ReviewServer is the server API for Review service.
 // All implementations must embed UnimplementedReviewServer
 // for forward compatibility.
@@ -104,6 +116,7 @@ type ReviewServer interface {
 	UpdateReview(context.Context, *UpdateReviewRequest) (*UpdateReviewResponse, error)
 	DeleteReviewById(context.Context, *DeleteReviewByIdRequest) (*DeleteReviewByIdResponse, error)
 	GetCoachReviews(context.Context, *GetCoachReviewsRequest) (*GetCoachReviewsResponse, error)
+	GetCoachesReviews(context.Context, *GetCoachesReviewsRequest) (*GetCoachesReviewsResponse, error)
 	mustEmbedUnimplementedReviewServer()
 }
 
@@ -128,6 +141,9 @@ func (UnimplementedReviewServer) DeleteReviewById(context.Context, *DeleteReview
 }
 func (UnimplementedReviewServer) GetCoachReviews(context.Context, *GetCoachReviewsRequest) (*GetCoachReviewsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCoachReviews not implemented")
+}
+func (UnimplementedReviewServer) GetCoachesReviews(context.Context, *GetCoachesReviewsRequest) (*GetCoachesReviewsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCoachesReviews not implemented")
 }
 func (UnimplementedReviewServer) mustEmbedUnimplementedReviewServer() {}
 func (UnimplementedReviewServer) testEmbeddedByValue()                {}
@@ -240,6 +256,24 @@ func _Review_GetCoachReviews_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Review_GetCoachesReviews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCoachesReviewsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReviewServer).GetCoachesReviews(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Review_GetCoachesReviews_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewServer).GetCoachesReviews(ctx, req.(*GetCoachesReviewsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Review_ServiceDesc is the grpc.ServiceDesc for Review service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -266,6 +300,10 @@ var Review_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCoachReviews",
 			Handler:    _Review_GetCoachReviews_Handler,
+		},
+		{
+			MethodName: "GetCoachesReviews",
+			Handler:    _Review_GetCoachesReviews_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

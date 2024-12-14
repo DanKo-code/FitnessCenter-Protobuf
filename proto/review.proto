@@ -11,6 +11,7 @@ service Review {
   rpc DeleteReviewById (DeleteReviewByIdRequest) returns (DeleteReviewByIdResponse);
 
   rpc GetCoachReviews (GetCoachReviewsRequest) returns (GetCoachReviewsResponse);
+  rpc GetCoachesReviews (GetCoachesReviewsRequest) returns (GetCoachesReviewsResponse);
 }
 
 message ReviewObject {
@@ -19,6 +20,10 @@ message ReviewObject {
   string body = 3;
   string created_time = 4;
   string updated_time = 5;
+}
+message CoachIdWithReviewObject {
+  string coach_id = 1;
+  repeated ReviewObject reviewObjects = 2;
 }
 
 message CoachReviewDataForCreate {
@@ -64,4 +69,11 @@ message GetCoachReviewsRequest {
 }
 message GetCoachReviewsResponse {
   repeated ReviewObject reviewObjects = 1;
+}
+
+message GetCoachesReviewsRequest {
+  repeated string coaches_ids = 1;
+}
+message GetCoachesReviewsResponse {
+    repeated CoachIdWithReviewObject coachIdWithReviewObject = 1;
 }
