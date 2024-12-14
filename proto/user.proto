@@ -14,6 +14,7 @@ service User {
 
   rpc GetUserByEmail (GetUserByEmailRequest) returns (GetUserByEmailResponse);
   rpc CheckPassword (CheckPasswordRequest) returns (google.protobuf.Empty);
+  rpc GetUsersByIds (GetUsersByIdsRequest) returns (GetUsersByIdsResponse);
 }
 
 message UserObject {
@@ -83,4 +84,11 @@ message GetUserByEmailResponse {
 message CheckPasswordRequest {
   string userId = 1;
   string password = 2;
+}
+
+message GetUsersByIdsRequest {
+  repeated string usersIds = 1;
+}
+message GetUsersByIdsResponse {
+  repeated UserObject usersObjects = 1;
 }
