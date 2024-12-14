@@ -28,6 +28,7 @@ const (
 	Service_CreateCoachServices_FullMethodName     = "/fitness_center.service.Service/CreateCoachServices"
 	Service_CreateAbonementServices_FullMethodName = "/fitness_center.service.Service/CreateAbonementServices"
 	Service_GetAbonementsServices_FullMethodName   = "/fitness_center.service.Service/GetAbonementsServices"
+	Service_GetCoachesServices_FullMethodName      = "/fitness_center.service.Service/GetCoachesServices"
 )
 
 // ServiceClient is the client API for Service service.
@@ -42,6 +43,7 @@ type ServiceClient interface {
 	CreateCoachServices(ctx context.Context, in *CreateCoachServicesRequest, opts ...grpc.CallOption) (*CreateCoachServicesResponse, error)
 	CreateAbonementServices(ctx context.Context, in *CreateAbonementServicesRequest, opts ...grpc.CallOption) (*CreateAbonementServicesResponse, error)
 	GetAbonementsServices(ctx context.Context, in *GetAbonementsServicesRequest, opts ...grpc.CallOption) (*GetAbonementsServicesResponse, error)
+	GetCoachesServices(ctx context.Context, in *GetCoachesServicesRequest, opts ...grpc.CallOption) (*GetCoachesServicesResponse, error)
 }
 
 type serviceClient struct {
@@ -138,6 +140,16 @@ func (c *serviceClient) GetAbonementsServices(ctx context.Context, in *GetAbonem
 	return out, nil
 }
 
+func (c *serviceClient) GetCoachesServices(ctx context.Context, in *GetCoachesServicesRequest, opts ...grpc.CallOption) (*GetCoachesServicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCoachesServicesResponse)
+	err := c.cc.Invoke(ctx, Service_GetCoachesServices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ServiceServer is the server API for Service service.
 // All implementations must embed UnimplementedServiceServer
 // for forward compatibility.
@@ -150,6 +162,7 @@ type ServiceServer interface {
 	CreateCoachServices(context.Context, *CreateCoachServicesRequest) (*CreateCoachServicesResponse, error)
 	CreateAbonementServices(context.Context, *CreateAbonementServicesRequest) (*CreateAbonementServicesResponse, error)
 	GetAbonementsServices(context.Context, *GetAbonementsServicesRequest) (*GetAbonementsServicesResponse, error)
+	GetCoachesServices(context.Context, *GetCoachesServicesRequest) (*GetCoachesServicesResponse, error)
 	mustEmbedUnimplementedServiceServer()
 }
 
@@ -183,6 +196,9 @@ func (UnimplementedServiceServer) CreateAbonementServices(context.Context, *Crea
 }
 func (UnimplementedServiceServer) GetAbonementsServices(context.Context, *GetAbonementsServicesRequest) (*GetAbonementsServicesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAbonementsServices not implemented")
+}
+func (UnimplementedServiceServer) GetCoachesServices(context.Context, *GetCoachesServicesRequest) (*GetCoachesServicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCoachesServices not implemented")
 }
 func (UnimplementedServiceServer) mustEmbedUnimplementedServiceServer() {}
 func (UnimplementedServiceServer) testEmbeddedByValue()                 {}
@@ -327,6 +343,24 @@ func _Service_GetAbonementsServices_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Service_GetCoachesServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCoachesServicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceServer).GetCoachesServices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Service_GetCoachesServices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceServer).GetCoachesServices(ctx, req.(*GetCoachesServicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Service_ServiceDesc is the grpc.ServiceDesc for Service service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -357,6 +391,10 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAbonementsServices",
 			Handler:    _Service_GetAbonementsServices_Handler,
+		},
+		{
+			MethodName: "GetCoachesServices",
+			Handler:    _Service_GetCoachesServices_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

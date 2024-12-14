@@ -16,6 +16,7 @@ service Service {
   rpc CreateCoachServices (CreateCoachServicesRequest) returns (CreateCoachServicesResponse);
   rpc CreateAbonementServices (CreateAbonementServicesRequest) returns (CreateAbonementServicesResponse);
   rpc GetAbonementsServices (GetAbonementsServicesRequest) returns (GetAbonementsServicesResponse);
+  rpc GetCoachesServices (GetCoachesServicesRequest) returns (GetCoachesServicesResponse);
 }
 
 message ServiceObject {
@@ -27,6 +28,10 @@ message ServiceObject {
 }
 message AbonementIdWithServices{
   string abonementId = 1;
+  repeated ServiceObject serviceObjects = 2;
+}
+message CoachIdWithServices{
+  string coachId = 1;
   repeated ServiceObject serviceObjects = 2;
 }
 
@@ -103,5 +108,12 @@ message GetAbonementsServicesRequest {
   repeated string abonementIds = 1;
 }
 message GetAbonementsServicesResponse {
-  repeated AbonementIdWithServices abonementIdsWithServices = 1 ;
+  repeated AbonementIdWithServices abonementIdsWithServices = 1;
+}
+
+message GetCoachesServicesRequest {
+  repeated string coachIds = 1;
+}
+message GetCoachesServicesResponse {
+  repeated CoachIdWithServices coachIdsWithServices = 1;
 }

@@ -151,6 +151,59 @@ func (x *AbonementIdWithServices) GetServiceObjects() []*ServiceObject {
 	return nil
 }
 
+type CoachIdWithServices struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CoachId        string           `protobuf:"bytes,1,opt,name=coachId,proto3" json:"coachId,omitempty"`
+	ServiceObjects []*ServiceObject `protobuf:"bytes,2,rep,name=serviceObjects,proto3" json:"serviceObjects,omitempty"`
+}
+
+func (x *CoachIdWithServices) Reset() {
+	*x = CoachIdWithServices{}
+	mi := &file_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CoachIdWithServices) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CoachIdWithServices) ProtoMessage() {}
+
+func (x *CoachIdWithServices) ProtoReflect() protoreflect.Message {
+	mi := &file_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CoachIdWithServices.ProtoReflect.Descriptor instead.
+func (*CoachIdWithServices) Descriptor() ([]byte, []int) {
+	return file_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *CoachIdWithServices) GetCoachId() string {
+	if x != nil {
+		return x.CoachId
+	}
+	return ""
+}
+
+func (x *CoachIdWithServices) GetServiceObjects() []*ServiceObject {
+	if x != nil {
+		return x.ServiceObjects
+	}
+	return nil
+}
+
 type ServiceDataForCreate struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -161,7 +214,7 @@ type ServiceDataForCreate struct {
 
 func (x *ServiceDataForCreate) Reset() {
 	*x = ServiceDataForCreate{}
-	mi := &file_service_proto_msgTypes[2]
+	mi := &file_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -173,7 +226,7 @@ func (x *ServiceDataForCreate) String() string {
 func (*ServiceDataForCreate) ProtoMessage() {}
 
 func (x *ServiceDataForCreate) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[2]
+	mi := &file_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -186,7 +239,7 @@ func (x *ServiceDataForCreate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServiceDataForCreate.ProtoReflect.Descriptor instead.
 func (*ServiceDataForCreate) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{2}
+	return file_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ServiceDataForCreate) GetTitle() string {
@@ -207,7 +260,7 @@ type ServiceDataForUpdate struct {
 
 func (x *ServiceDataForUpdate) Reset() {
 	*x = ServiceDataForUpdate{}
-	mi := &file_service_proto_msgTypes[3]
+	mi := &file_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -219,7 +272,7 @@ func (x *ServiceDataForUpdate) String() string {
 func (*ServiceDataForUpdate) ProtoMessage() {}
 
 func (x *ServiceDataForUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[3]
+	mi := &file_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -232,7 +285,7 @@ func (x *ServiceDataForUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServiceDataForUpdate.ProtoReflect.Descriptor instead.
 func (*ServiceDataForUpdate) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{3}
+	return file_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ServiceDataForUpdate) GetId() string {
@@ -260,7 +313,7 @@ type CoachService struct {
 
 func (x *CoachService) Reset() {
 	*x = CoachService{}
-	mi := &file_service_proto_msgTypes[4]
+	mi := &file_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -272,7 +325,7 @@ func (x *CoachService) String() string {
 func (*CoachService) ProtoMessage() {}
 
 func (x *CoachService) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[4]
+	mi := &file_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -285,7 +338,7 @@ func (x *CoachService) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CoachService.ProtoReflect.Descriptor instead.
 func (*CoachService) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{4}
+	return file_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CoachService) GetCoachId() string {
@@ -313,7 +366,7 @@ type AbonementService struct {
 
 func (x *AbonementService) Reset() {
 	*x = AbonementService{}
-	mi := &file_service_proto_msgTypes[5]
+	mi := &file_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -325,7 +378,7 @@ func (x *AbonementService) String() string {
 func (*AbonementService) ProtoMessage() {}
 
 func (x *AbonementService) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[5]
+	mi := &file_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -338,7 +391,7 @@ func (x *AbonementService) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AbonementService.ProtoReflect.Descriptor instead.
 func (*AbonementService) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{5}
+	return file_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *AbonementService) GetAbonementId() string {
@@ -369,7 +422,7 @@ type CreateServiceRequest struct {
 
 func (x *CreateServiceRequest) Reset() {
 	*x = CreateServiceRequest{}
-	mi := &file_service_proto_msgTypes[6]
+	mi := &file_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -381,7 +434,7 @@ func (x *CreateServiceRequest) String() string {
 func (*CreateServiceRequest) ProtoMessage() {}
 
 func (x *CreateServiceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[6]
+	mi := &file_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -394,7 +447,7 @@ func (x *CreateServiceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateServiceRequest.ProtoReflect.Descriptor instead.
 func (*CreateServiceRequest) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{6}
+	return file_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (m *CreateServiceRequest) GetPayload() isCreateServiceRequest_Payload {
@@ -444,7 +497,7 @@ type CreateServiceResponse struct {
 
 func (x *CreateServiceResponse) Reset() {
 	*x = CreateServiceResponse{}
-	mi := &file_service_proto_msgTypes[7]
+	mi := &file_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -456,7 +509,7 @@ func (x *CreateServiceResponse) String() string {
 func (*CreateServiceResponse) ProtoMessage() {}
 
 func (x *CreateServiceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[7]
+	mi := &file_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -469,7 +522,7 @@ func (x *CreateServiceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateServiceResponse.ProtoReflect.Descriptor instead.
 func (*CreateServiceResponse) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{7}
+	return file_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CreateServiceResponse) GetServiceObject() *ServiceObject {
@@ -489,7 +542,7 @@ type GetServiceByIdRequest struct {
 
 func (x *GetServiceByIdRequest) Reset() {
 	*x = GetServiceByIdRequest{}
-	mi := &file_service_proto_msgTypes[8]
+	mi := &file_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -501,7 +554,7 @@ func (x *GetServiceByIdRequest) String() string {
 func (*GetServiceByIdRequest) ProtoMessage() {}
 
 func (x *GetServiceByIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[8]
+	mi := &file_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -514,7 +567,7 @@ func (x *GetServiceByIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetServiceByIdRequest.ProtoReflect.Descriptor instead.
 func (*GetServiceByIdRequest) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{8}
+	return file_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetServiceByIdRequest) GetId() string {
@@ -534,7 +587,7 @@ type GetServiceByIdResponse struct {
 
 func (x *GetServiceByIdResponse) Reset() {
 	*x = GetServiceByIdResponse{}
-	mi := &file_service_proto_msgTypes[9]
+	mi := &file_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -546,7 +599,7 @@ func (x *GetServiceByIdResponse) String() string {
 func (*GetServiceByIdResponse) ProtoMessage() {}
 
 func (x *GetServiceByIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[9]
+	mi := &file_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -559,7 +612,7 @@ func (x *GetServiceByIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetServiceByIdResponse.ProtoReflect.Descriptor instead.
 func (*GetServiceByIdResponse) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{9}
+	return file_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetServiceByIdResponse) GetServiceObject() *ServiceObject {
@@ -583,7 +636,7 @@ type UpdateServiceRequest struct {
 
 func (x *UpdateServiceRequest) Reset() {
 	*x = UpdateServiceRequest{}
-	mi := &file_service_proto_msgTypes[10]
+	mi := &file_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -595,7 +648,7 @@ func (x *UpdateServiceRequest) String() string {
 func (*UpdateServiceRequest) ProtoMessage() {}
 
 func (x *UpdateServiceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[10]
+	mi := &file_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -608,7 +661,7 @@ func (x *UpdateServiceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateServiceRequest.ProtoReflect.Descriptor instead.
 func (*UpdateServiceRequest) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{10}
+	return file_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (m *UpdateServiceRequest) GetPayload() isUpdateServiceRequest_Payload {
@@ -658,7 +711,7 @@ type UpdateServiceResponse struct {
 
 func (x *UpdateServiceResponse) Reset() {
 	*x = UpdateServiceResponse{}
-	mi := &file_service_proto_msgTypes[11]
+	mi := &file_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -670,7 +723,7 @@ func (x *UpdateServiceResponse) String() string {
 func (*UpdateServiceResponse) ProtoMessage() {}
 
 func (x *UpdateServiceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[11]
+	mi := &file_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -683,7 +736,7 @@ func (x *UpdateServiceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateServiceResponse.ProtoReflect.Descriptor instead.
 func (*UpdateServiceResponse) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{11}
+	return file_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *UpdateServiceResponse) GetServiceObject() *ServiceObject {
@@ -703,7 +756,7 @@ type DeleteServiceByIdRequest struct {
 
 func (x *DeleteServiceByIdRequest) Reset() {
 	*x = DeleteServiceByIdRequest{}
-	mi := &file_service_proto_msgTypes[12]
+	mi := &file_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -715,7 +768,7 @@ func (x *DeleteServiceByIdRequest) String() string {
 func (*DeleteServiceByIdRequest) ProtoMessage() {}
 
 func (x *DeleteServiceByIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[12]
+	mi := &file_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -728,7 +781,7 @@ func (x *DeleteServiceByIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteServiceByIdRequest.ProtoReflect.Descriptor instead.
 func (*DeleteServiceByIdRequest) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{12}
+	return file_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *DeleteServiceByIdRequest) GetId() string {
@@ -748,7 +801,7 @@ type DeleteServiceByIdResponse struct {
 
 func (x *DeleteServiceByIdResponse) Reset() {
 	*x = DeleteServiceByIdResponse{}
-	mi := &file_service_proto_msgTypes[13]
+	mi := &file_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -760,7 +813,7 @@ func (x *DeleteServiceByIdResponse) String() string {
 func (*DeleteServiceByIdResponse) ProtoMessage() {}
 
 func (x *DeleteServiceByIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[13]
+	mi := &file_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -773,7 +826,7 @@ func (x *DeleteServiceByIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteServiceByIdResponse.ProtoReflect.Descriptor instead.
 func (*DeleteServiceByIdResponse) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{13}
+	return file_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *DeleteServiceByIdResponse) GetServiceObject() *ServiceObject {
@@ -793,7 +846,7 @@ type GetServicesResponse struct {
 
 func (x *GetServicesResponse) Reset() {
 	*x = GetServicesResponse{}
-	mi := &file_service_proto_msgTypes[14]
+	mi := &file_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -805,7 +858,7 @@ func (x *GetServicesResponse) String() string {
 func (*GetServicesResponse) ProtoMessage() {}
 
 func (x *GetServicesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[14]
+	mi := &file_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -818,7 +871,7 @@ func (x *GetServicesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetServicesResponse.ProtoReflect.Descriptor instead.
 func (*GetServicesResponse) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{14}
+	return file_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetServicesResponse) GetServiceObject() []*ServiceObject {
@@ -838,7 +891,7 @@ type CreateCoachServicesRequest struct {
 
 func (x *CreateCoachServicesRequest) Reset() {
 	*x = CreateCoachServicesRequest{}
-	mi := &file_service_proto_msgTypes[15]
+	mi := &file_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -850,7 +903,7 @@ func (x *CreateCoachServicesRequest) String() string {
 func (*CreateCoachServicesRequest) ProtoMessage() {}
 
 func (x *CreateCoachServicesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[15]
+	mi := &file_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -863,7 +916,7 @@ func (x *CreateCoachServicesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCoachServicesRequest.ProtoReflect.Descriptor instead.
 func (*CreateCoachServicesRequest) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{15}
+	return file_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *CreateCoachServicesRequest) GetCoachService() *CoachService {
@@ -883,7 +936,7 @@ type CreateCoachServicesResponse struct {
 
 func (x *CreateCoachServicesResponse) Reset() {
 	*x = CreateCoachServicesResponse{}
-	mi := &file_service_proto_msgTypes[16]
+	mi := &file_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -895,7 +948,7 @@ func (x *CreateCoachServicesResponse) String() string {
 func (*CreateCoachServicesResponse) ProtoMessage() {}
 
 func (x *CreateCoachServicesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[16]
+	mi := &file_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -908,7 +961,7 @@ func (x *CreateCoachServicesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCoachServicesResponse.ProtoReflect.Descriptor instead.
 func (*CreateCoachServicesResponse) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{16}
+	return file_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *CreateCoachServicesResponse) GetCoachService() *CoachService {
@@ -928,7 +981,7 @@ type CreateAbonementServicesRequest struct {
 
 func (x *CreateAbonementServicesRequest) Reset() {
 	*x = CreateAbonementServicesRequest{}
-	mi := &file_service_proto_msgTypes[17]
+	mi := &file_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -940,7 +993,7 @@ func (x *CreateAbonementServicesRequest) String() string {
 func (*CreateAbonementServicesRequest) ProtoMessage() {}
 
 func (x *CreateAbonementServicesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[17]
+	mi := &file_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -953,7 +1006,7 @@ func (x *CreateAbonementServicesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAbonementServicesRequest.ProtoReflect.Descriptor instead.
 func (*CreateAbonementServicesRequest) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{17}
+	return file_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *CreateAbonementServicesRequest) GetAbonementService() *AbonementService {
@@ -973,7 +1026,7 @@ type CreateAbonementServicesResponse struct {
 
 func (x *CreateAbonementServicesResponse) Reset() {
 	*x = CreateAbonementServicesResponse{}
-	mi := &file_service_proto_msgTypes[18]
+	mi := &file_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -985,7 +1038,7 @@ func (x *CreateAbonementServicesResponse) String() string {
 func (*CreateAbonementServicesResponse) ProtoMessage() {}
 
 func (x *CreateAbonementServicesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[18]
+	mi := &file_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -998,7 +1051,7 @@ func (x *CreateAbonementServicesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAbonementServicesResponse.ProtoReflect.Descriptor instead.
 func (*CreateAbonementServicesResponse) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{18}
+	return file_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *CreateAbonementServicesResponse) GetAbonementService() *AbonementService {
@@ -1018,7 +1071,7 @@ type GetAbonementsServicesRequest struct {
 
 func (x *GetAbonementsServicesRequest) Reset() {
 	*x = GetAbonementsServicesRequest{}
-	mi := &file_service_proto_msgTypes[19]
+	mi := &file_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1030,7 +1083,7 @@ func (x *GetAbonementsServicesRequest) String() string {
 func (*GetAbonementsServicesRequest) ProtoMessage() {}
 
 func (x *GetAbonementsServicesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[19]
+	mi := &file_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1043,7 +1096,7 @@ func (x *GetAbonementsServicesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAbonementsServicesRequest.ProtoReflect.Descriptor instead.
 func (*GetAbonementsServicesRequest) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{19}
+	return file_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GetAbonementsServicesRequest) GetAbonementIds() []string {
@@ -1063,7 +1116,7 @@ type GetAbonementsServicesResponse struct {
 
 func (x *GetAbonementsServicesResponse) Reset() {
 	*x = GetAbonementsServicesResponse{}
-	mi := &file_service_proto_msgTypes[20]
+	mi := &file_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1075,7 +1128,7 @@ func (x *GetAbonementsServicesResponse) String() string {
 func (*GetAbonementsServicesResponse) ProtoMessage() {}
 
 func (x *GetAbonementsServicesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_proto_msgTypes[20]
+	mi := &file_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1088,12 +1141,102 @@ func (x *GetAbonementsServicesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAbonementsServicesResponse.ProtoReflect.Descriptor instead.
 func (*GetAbonementsServicesResponse) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{20}
+	return file_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GetAbonementsServicesResponse) GetAbonementIdsWithServices() []*AbonementIdWithServices {
 	if x != nil {
 		return x.AbonementIdsWithServices
+	}
+	return nil
+}
+
+type GetCoachesServicesRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CoachIds []string `protobuf:"bytes,1,rep,name=coachIds,proto3" json:"coachIds,omitempty"`
+}
+
+func (x *GetCoachesServicesRequest) Reset() {
+	*x = GetCoachesServicesRequest{}
+	mi := &file_service_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCoachesServicesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCoachesServicesRequest) ProtoMessage() {}
+
+func (x *GetCoachesServicesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCoachesServicesRequest.ProtoReflect.Descriptor instead.
+func (*GetCoachesServicesRequest) Descriptor() ([]byte, []int) {
+	return file_service_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *GetCoachesServicesRequest) GetCoachIds() []string {
+	if x != nil {
+		return x.CoachIds
+	}
+	return nil
+}
+
+type GetCoachesServicesResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CoachIdsWithServices []*CoachIdWithServices `protobuf:"bytes,1,rep,name=coachIdsWithServices,proto3" json:"coachIdsWithServices,omitempty"`
+}
+
+func (x *GetCoachesServicesResponse) Reset() {
+	*x = GetCoachesServicesResponse{}
+	mi := &file_service_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCoachesServicesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCoachesServicesResponse) ProtoMessage() {}
+
+func (x *GetCoachesServicesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_service_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCoachesServicesResponse.ProtoReflect.Descriptor instead.
+func (*GetCoachesServicesResponse) Descriptor() ([]byte, []int) {
+	return file_service_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *GetCoachesServicesResponse) GetCoachIdsWithServices() []*CoachIdWithServices {
+	if x != nil {
+		return x.CoachIdsWithServices
 	}
 	return nil
 }
@@ -1119,6 +1262,14 @@ var file_service_proto_rawDesc = []byte{
 	0x69, 0x63, 0x65, 0x73, 0x12, 0x20, 0x0a, 0x0b, 0x61, 0x62, 0x6f, 0x6e, 0x65, 0x6d, 0x65, 0x6e,
 	0x74, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x61, 0x62, 0x6f, 0x6e, 0x65,
 	0x6d, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x4d, 0x0a, 0x0e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x25,
+	0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e,
+	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x4f,
+	0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x0e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x4f, 0x62,
+	0x6a, 0x65, 0x63, 0x74, 0x73, 0x22, 0x7e, 0x0a, 0x13, 0x43, 0x6f, 0x61, 0x63, 0x68, 0x49, 0x64,
+	0x57, 0x69, 0x74, 0x68, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x12, 0x18, 0x0a, 0x07,
+	0x63, 0x6f, 0x61, 0x63, 0x68, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63,
+	0x6f, 0x61, 0x63, 0x68, 0x49, 0x64, 0x12, 0x4d, 0x0a, 0x0e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
 	0x65, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x25,
 	0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e,
 	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x4f,
@@ -1240,69 +1391,89 @@ var file_service_proto_rawDesc = []byte{
 	0x63, 0x65, 0x2e, 0x41, 0x62, 0x6f, 0x6e, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x57, 0x69,
 	0x74, 0x68, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x18, 0x61, 0x62, 0x6f, 0x6e,
 	0x65, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x73, 0x57, 0x69, 0x74, 0x68, 0x53, 0x65, 0x72, 0x76,
-	0x69, 0x63, 0x65, 0x73, 0x32, 0xbc, 0x07, 0x0a, 0x07, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
-	0x12, 0x6e, 0x0a, 0x0d, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
-	0x65, 0x12, 0x2c, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74,
-	0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74,
-	0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x2d, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72,
-	0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53,
-	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x28, 0x01,
-	0x12, 0x6f, 0x0a, 0x0e, 0x47, 0x65, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x42, 0x79,
-	0x49, 0x64, 0x12, 0x2d, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e,
-	0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x53,
-	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x42, 0x79, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x2e, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74,
-	0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x42, 0x79, 0x49, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x12, 0x6e, 0x0a, 0x0d, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69,
-	0x63, 0x65, 0x12, 0x2c, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e,
-	0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x55, 0x70, 0x64, 0x61,
-	0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x2d, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65,
-	0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
-	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x28,
-	0x01, 0x12, 0x78, 0x0a, 0x11, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69,
-	0x63, 0x65, 0x42, 0x79, 0x49, 0x64, 0x12, 0x30, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73,
-	0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e,
-	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x42, 0x79, 0x49,
-	0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x31, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65,
-	0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
-	0x65, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x42,
-	0x79, 0x49, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x52, 0x0a, 0x0b, 0x47,
-	0x65, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f,
-	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70,
-	0x74, 0x79, 0x1a, 0x2b, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e,
-	0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x53,
-	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x7e, 0x0a, 0x13, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x61, 0x63, 0x68, 0x53, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x12, 0x32, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73,
-	0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e,
-	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x61, 0x63, 0x68, 0x53, 0x65, 0x72, 0x76, 0x69,
-	0x63, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x33, 0x2e, 0x66, 0x69, 0x74,
+	0x69, 0x63, 0x65, 0x73, 0x22, 0x37, 0x0a, 0x19, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x61, 0x63, 0x68,
+	0x65, 0x73, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x6f, 0x61, 0x63, 0x68, 0x49, 0x64, 0x73, 0x18, 0x01, 0x20,
+	0x03, 0x28, 0x09, 0x52, 0x08, 0x63, 0x6f, 0x61, 0x63, 0x68, 0x49, 0x64, 0x73, 0x22, 0x7d, 0x0a,
+	0x1a, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x61, 0x63, 0x68, 0x65, 0x73, 0x53, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5f, 0x0a, 0x14, 0x63,
+	0x6f, 0x61, 0x63, 0x68, 0x49, 0x64, 0x73, 0x57, 0x69, 0x74, 0x68, 0x53, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2b, 0x2e, 0x66, 0x69, 0x74, 0x6e,
+	0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x2e, 0x43, 0x6f, 0x61, 0x63, 0x68, 0x49, 0x64, 0x57, 0x69, 0x74, 0x68, 0x53, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x14, 0x63, 0x6f, 0x61, 0x63, 0x68, 0x49, 0x64, 0x73,
+	0x57, 0x69, 0x74, 0x68, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x32, 0xb9, 0x08, 0x0a,
+	0x07, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x6e, 0x0a, 0x0d, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x2c, 0x2e, 0x66, 0x69, 0x74, 0x6e,
+	0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2d, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73,
+	0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x28, 0x01, 0x12, 0x6f, 0x0a, 0x0e, 0x47, 0x65, 0x74, 0x53,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x42, 0x79, 0x49, 0x64, 0x12, 0x2d, 0x2e, 0x66, 0x69, 0x74,
 	0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76,
-	0x69, 0x63, 0x65, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x61, 0x63, 0x68, 0x53,
-	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x8a, 0x01, 0x0a, 0x17, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x62, 0x6f, 0x6e, 0x65, 0x6d,
-	0x65, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x12, 0x36, 0x2e, 0x66, 0x69,
-	0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72,
-	0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x62, 0x6f, 0x6e, 0x65,
-	0x6d, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x37, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65,
+	0x69, 0x63, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x42, 0x79,
+	0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2e, 0x2e, 0x66, 0x69, 0x74, 0x6e,
+	0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x42, 0x79, 0x49,
+	0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x6e, 0x0a, 0x0d, 0x55, 0x70, 0x64,
+	0x61, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x2c, 0x2e, 0x66, 0x69, 0x74,
+	0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2d, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65,
+	0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x28, 0x01, 0x12, 0x78, 0x0a, 0x11, 0x44, 0x65, 0x6c,
+	0x65, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x42, 0x79, 0x49, 0x64, 0x12, 0x30,
+	0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e,
+	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x42, 0x79, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x31, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65,
+	0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
+	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x42, 0x79, 0x49, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x52, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x73, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x2b, 0x2e, 0x66, 0x69, 0x74,
+	0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x7e, 0x0a, 0x13, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x43, 0x6f, 0x61, 0x63, 0x68, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x12, 0x32,
+	0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e,
+	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6f,
+	0x61, 0x63, 0x68, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x33, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e,
+	0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x43, 0x6f, 0x61, 0x63, 0x68, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x8a, 0x01, 0x0a, 0x17, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x41, 0x62, 0x6f, 0x6e, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x73, 0x12, 0x36, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65,
 	0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x72, 0x65,
 	0x61, 0x74, 0x65, 0x41, 0x62, 0x6f, 0x6e, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76,
-	0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x84, 0x01, 0x0a,
-	0x15, 0x47, 0x65, 0x74, 0x41, 0x62, 0x6f, 0x6e, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x53, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x12, 0x34, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73,
-	0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e,
-	0x47, 0x65, 0x74, 0x41, 0x62, 0x6f, 0x6e, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x53, 0x65, 0x72,
-	0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x35, 0x2e, 0x66,
-	0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x41, 0x62, 0x6f, 0x6e, 0x65, 0x6d, 0x65,
-	0x6e, 0x74, 0x73, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x42, 0x20, 0x5a, 0x1e, 0x46, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x43, 0x65,
-	0x6e, 0x74, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x73, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x37, 0x2e, 0x66, 0x69,
+	0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x62, 0x6f, 0x6e, 0x65,
+	0x6d, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x84, 0x01, 0x0a, 0x15, 0x47, 0x65, 0x74, 0x41, 0x62, 0x6f, 0x6e,
+	0x65, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x12, 0x34,
+	0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e,
+	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x41, 0x62, 0x6f, 0x6e, 0x65,
+	0x6d, 0x65, 0x6e, 0x74, 0x73, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x35, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63,
+	0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x47, 0x65,
+	0x74, 0x41, 0x62, 0x6f, 0x6e, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x53, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x7b, 0x0a, 0x12, 0x47,
+	0x65, 0x74, 0x43, 0x6f, 0x61, 0x63, 0x68, 0x65, 0x73, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x73, 0x12, 0x31, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63, 0x65, 0x6e, 0x74,
+	0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x6f,
+	0x61, 0x63, 0x68, 0x65, 0x73, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x32, 0x2e, 0x66, 0x69, 0x74, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x63,
+	0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x47, 0x65,
+	0x74, 0x43, 0x6f, 0x61, 0x63, 0x68, 0x65, 0x73, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x20, 0x5a, 0x1e, 0x46, 0x69, 0x74, 0x6e,
+	0x65, 0x73, 0x73, 0x43, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
+	0x75, 0x66, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -1317,66 +1488,73 @@ func file_service_proto_rawDescGZIP() []byte {
 	return file_service_proto_rawDescData
 }
 
-var file_service_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_service_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_service_proto_goTypes = []any{
 	(*ServiceObject)(nil),                   // 0: fitness_center.service.ServiceObject
 	(*AbonementIdWithServices)(nil),         // 1: fitness_center.service.AbonementIdWithServices
-	(*ServiceDataForCreate)(nil),            // 2: fitness_center.service.ServiceDataForCreate
-	(*ServiceDataForUpdate)(nil),            // 3: fitness_center.service.ServiceDataForUpdate
-	(*CoachService)(nil),                    // 4: fitness_center.service.CoachService
-	(*AbonementService)(nil),                // 5: fitness_center.service.AbonementService
-	(*CreateServiceRequest)(nil),            // 6: fitness_center.service.CreateServiceRequest
-	(*CreateServiceResponse)(nil),           // 7: fitness_center.service.CreateServiceResponse
-	(*GetServiceByIdRequest)(nil),           // 8: fitness_center.service.GetServiceByIdRequest
-	(*GetServiceByIdResponse)(nil),          // 9: fitness_center.service.GetServiceByIdResponse
-	(*UpdateServiceRequest)(nil),            // 10: fitness_center.service.UpdateServiceRequest
-	(*UpdateServiceResponse)(nil),           // 11: fitness_center.service.UpdateServiceResponse
-	(*DeleteServiceByIdRequest)(nil),        // 12: fitness_center.service.DeleteServiceByIdRequest
-	(*DeleteServiceByIdResponse)(nil),       // 13: fitness_center.service.DeleteServiceByIdResponse
-	(*GetServicesResponse)(nil),             // 14: fitness_center.service.GetServicesResponse
-	(*CreateCoachServicesRequest)(nil),      // 15: fitness_center.service.CreateCoachServicesRequest
-	(*CreateCoachServicesResponse)(nil),     // 16: fitness_center.service.CreateCoachServicesResponse
-	(*CreateAbonementServicesRequest)(nil),  // 17: fitness_center.service.CreateAbonementServicesRequest
-	(*CreateAbonementServicesResponse)(nil), // 18: fitness_center.service.CreateAbonementServicesResponse
-	(*GetAbonementsServicesRequest)(nil),    // 19: fitness_center.service.GetAbonementsServicesRequest
-	(*GetAbonementsServicesResponse)(nil),   // 20: fitness_center.service.GetAbonementsServicesResponse
-	(*emptypb.Empty)(nil),                   // 21: google.protobuf.Empty
+	(*CoachIdWithServices)(nil),             // 2: fitness_center.service.CoachIdWithServices
+	(*ServiceDataForCreate)(nil),            // 3: fitness_center.service.ServiceDataForCreate
+	(*ServiceDataForUpdate)(nil),            // 4: fitness_center.service.ServiceDataForUpdate
+	(*CoachService)(nil),                    // 5: fitness_center.service.CoachService
+	(*AbonementService)(nil),                // 6: fitness_center.service.AbonementService
+	(*CreateServiceRequest)(nil),            // 7: fitness_center.service.CreateServiceRequest
+	(*CreateServiceResponse)(nil),           // 8: fitness_center.service.CreateServiceResponse
+	(*GetServiceByIdRequest)(nil),           // 9: fitness_center.service.GetServiceByIdRequest
+	(*GetServiceByIdResponse)(nil),          // 10: fitness_center.service.GetServiceByIdResponse
+	(*UpdateServiceRequest)(nil),            // 11: fitness_center.service.UpdateServiceRequest
+	(*UpdateServiceResponse)(nil),           // 12: fitness_center.service.UpdateServiceResponse
+	(*DeleteServiceByIdRequest)(nil),        // 13: fitness_center.service.DeleteServiceByIdRequest
+	(*DeleteServiceByIdResponse)(nil),       // 14: fitness_center.service.DeleteServiceByIdResponse
+	(*GetServicesResponse)(nil),             // 15: fitness_center.service.GetServicesResponse
+	(*CreateCoachServicesRequest)(nil),      // 16: fitness_center.service.CreateCoachServicesRequest
+	(*CreateCoachServicesResponse)(nil),     // 17: fitness_center.service.CreateCoachServicesResponse
+	(*CreateAbonementServicesRequest)(nil),  // 18: fitness_center.service.CreateAbonementServicesRequest
+	(*CreateAbonementServicesResponse)(nil), // 19: fitness_center.service.CreateAbonementServicesResponse
+	(*GetAbonementsServicesRequest)(nil),    // 20: fitness_center.service.GetAbonementsServicesRequest
+	(*GetAbonementsServicesResponse)(nil),   // 21: fitness_center.service.GetAbonementsServicesResponse
+	(*GetCoachesServicesRequest)(nil),       // 22: fitness_center.service.GetCoachesServicesRequest
+	(*GetCoachesServicesResponse)(nil),      // 23: fitness_center.service.GetCoachesServicesResponse
+	(*emptypb.Empty)(nil),                   // 24: google.protobuf.Empty
 }
 var file_service_proto_depIdxs = []int32{
 	0,  // 0: fitness_center.service.AbonementIdWithServices.serviceObjects:type_name -> fitness_center.service.ServiceObject
-	2,  // 1: fitness_center.service.CreateServiceRequest.serviceDataForCreate:type_name -> fitness_center.service.ServiceDataForCreate
-	0,  // 2: fitness_center.service.CreateServiceResponse.serviceObject:type_name -> fitness_center.service.ServiceObject
-	0,  // 3: fitness_center.service.GetServiceByIdResponse.serviceObject:type_name -> fitness_center.service.ServiceObject
-	3,  // 4: fitness_center.service.UpdateServiceRequest.serviceDataForUpdate:type_name -> fitness_center.service.ServiceDataForUpdate
-	0,  // 5: fitness_center.service.UpdateServiceResponse.serviceObject:type_name -> fitness_center.service.ServiceObject
-	0,  // 6: fitness_center.service.DeleteServiceByIdResponse.serviceObject:type_name -> fitness_center.service.ServiceObject
-	0,  // 7: fitness_center.service.GetServicesResponse.serviceObject:type_name -> fitness_center.service.ServiceObject
-	4,  // 8: fitness_center.service.CreateCoachServicesRequest.coachService:type_name -> fitness_center.service.CoachService
-	4,  // 9: fitness_center.service.CreateCoachServicesResponse.coachService:type_name -> fitness_center.service.CoachService
-	5,  // 10: fitness_center.service.CreateAbonementServicesRequest.abonementService:type_name -> fitness_center.service.AbonementService
-	5,  // 11: fitness_center.service.CreateAbonementServicesResponse.abonementService:type_name -> fitness_center.service.AbonementService
-	1,  // 12: fitness_center.service.GetAbonementsServicesResponse.abonementIdsWithServices:type_name -> fitness_center.service.AbonementIdWithServices
-	6,  // 13: fitness_center.service.Service.CreateService:input_type -> fitness_center.service.CreateServiceRequest
-	8,  // 14: fitness_center.service.Service.GetServiceById:input_type -> fitness_center.service.GetServiceByIdRequest
-	10, // 15: fitness_center.service.Service.UpdateService:input_type -> fitness_center.service.UpdateServiceRequest
-	12, // 16: fitness_center.service.Service.DeleteServiceById:input_type -> fitness_center.service.DeleteServiceByIdRequest
-	21, // 17: fitness_center.service.Service.GetServices:input_type -> google.protobuf.Empty
-	15, // 18: fitness_center.service.Service.CreateCoachServices:input_type -> fitness_center.service.CreateCoachServicesRequest
-	17, // 19: fitness_center.service.Service.CreateAbonementServices:input_type -> fitness_center.service.CreateAbonementServicesRequest
-	19, // 20: fitness_center.service.Service.GetAbonementsServices:input_type -> fitness_center.service.GetAbonementsServicesRequest
-	7,  // 21: fitness_center.service.Service.CreateService:output_type -> fitness_center.service.CreateServiceResponse
-	9,  // 22: fitness_center.service.Service.GetServiceById:output_type -> fitness_center.service.GetServiceByIdResponse
-	11, // 23: fitness_center.service.Service.UpdateService:output_type -> fitness_center.service.UpdateServiceResponse
-	13, // 24: fitness_center.service.Service.DeleteServiceById:output_type -> fitness_center.service.DeleteServiceByIdResponse
-	14, // 25: fitness_center.service.Service.GetServices:output_type -> fitness_center.service.GetServicesResponse
-	16, // 26: fitness_center.service.Service.CreateCoachServices:output_type -> fitness_center.service.CreateCoachServicesResponse
-	18, // 27: fitness_center.service.Service.CreateAbonementServices:output_type -> fitness_center.service.CreateAbonementServicesResponse
-	20, // 28: fitness_center.service.Service.GetAbonementsServices:output_type -> fitness_center.service.GetAbonementsServicesResponse
-	21, // [21:29] is the sub-list for method output_type
-	13, // [13:21] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	0,  // 1: fitness_center.service.CoachIdWithServices.serviceObjects:type_name -> fitness_center.service.ServiceObject
+	3,  // 2: fitness_center.service.CreateServiceRequest.serviceDataForCreate:type_name -> fitness_center.service.ServiceDataForCreate
+	0,  // 3: fitness_center.service.CreateServiceResponse.serviceObject:type_name -> fitness_center.service.ServiceObject
+	0,  // 4: fitness_center.service.GetServiceByIdResponse.serviceObject:type_name -> fitness_center.service.ServiceObject
+	4,  // 5: fitness_center.service.UpdateServiceRequest.serviceDataForUpdate:type_name -> fitness_center.service.ServiceDataForUpdate
+	0,  // 6: fitness_center.service.UpdateServiceResponse.serviceObject:type_name -> fitness_center.service.ServiceObject
+	0,  // 7: fitness_center.service.DeleteServiceByIdResponse.serviceObject:type_name -> fitness_center.service.ServiceObject
+	0,  // 8: fitness_center.service.GetServicesResponse.serviceObject:type_name -> fitness_center.service.ServiceObject
+	5,  // 9: fitness_center.service.CreateCoachServicesRequest.coachService:type_name -> fitness_center.service.CoachService
+	5,  // 10: fitness_center.service.CreateCoachServicesResponse.coachService:type_name -> fitness_center.service.CoachService
+	6,  // 11: fitness_center.service.CreateAbonementServicesRequest.abonementService:type_name -> fitness_center.service.AbonementService
+	6,  // 12: fitness_center.service.CreateAbonementServicesResponse.abonementService:type_name -> fitness_center.service.AbonementService
+	1,  // 13: fitness_center.service.GetAbonementsServicesResponse.abonementIdsWithServices:type_name -> fitness_center.service.AbonementIdWithServices
+	2,  // 14: fitness_center.service.GetCoachesServicesResponse.coachIdsWithServices:type_name -> fitness_center.service.CoachIdWithServices
+	7,  // 15: fitness_center.service.Service.CreateService:input_type -> fitness_center.service.CreateServiceRequest
+	9,  // 16: fitness_center.service.Service.GetServiceById:input_type -> fitness_center.service.GetServiceByIdRequest
+	11, // 17: fitness_center.service.Service.UpdateService:input_type -> fitness_center.service.UpdateServiceRequest
+	13, // 18: fitness_center.service.Service.DeleteServiceById:input_type -> fitness_center.service.DeleteServiceByIdRequest
+	24, // 19: fitness_center.service.Service.GetServices:input_type -> google.protobuf.Empty
+	16, // 20: fitness_center.service.Service.CreateCoachServices:input_type -> fitness_center.service.CreateCoachServicesRequest
+	18, // 21: fitness_center.service.Service.CreateAbonementServices:input_type -> fitness_center.service.CreateAbonementServicesRequest
+	20, // 22: fitness_center.service.Service.GetAbonementsServices:input_type -> fitness_center.service.GetAbonementsServicesRequest
+	22, // 23: fitness_center.service.Service.GetCoachesServices:input_type -> fitness_center.service.GetCoachesServicesRequest
+	8,  // 24: fitness_center.service.Service.CreateService:output_type -> fitness_center.service.CreateServiceResponse
+	10, // 25: fitness_center.service.Service.GetServiceById:output_type -> fitness_center.service.GetServiceByIdResponse
+	12, // 26: fitness_center.service.Service.UpdateService:output_type -> fitness_center.service.UpdateServiceResponse
+	14, // 27: fitness_center.service.Service.DeleteServiceById:output_type -> fitness_center.service.DeleteServiceByIdResponse
+	15, // 28: fitness_center.service.Service.GetServices:output_type -> fitness_center.service.GetServicesResponse
+	17, // 29: fitness_center.service.Service.CreateCoachServices:output_type -> fitness_center.service.CreateCoachServicesResponse
+	19, // 30: fitness_center.service.Service.CreateAbonementServices:output_type -> fitness_center.service.CreateAbonementServicesResponse
+	21, // 31: fitness_center.service.Service.GetAbonementsServices:output_type -> fitness_center.service.GetAbonementsServicesResponse
+	23, // 32: fitness_center.service.Service.GetCoachesServices:output_type -> fitness_center.service.GetCoachesServicesResponse
+	24, // [24:33] is the sub-list for method output_type
+	15, // [15:24] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_service_proto_init() }
@@ -1384,11 +1562,11 @@ func file_service_proto_init() {
 	if File_service_proto != nil {
 		return
 	}
-	file_service_proto_msgTypes[6].OneofWrappers = []any{
+	file_service_proto_msgTypes[7].OneofWrappers = []any{
 		(*CreateServiceRequest_ServiceDataForCreate)(nil),
 		(*CreateServiceRequest_ServicePhoto)(nil),
 	}
-	file_service_proto_msgTypes[10].OneofWrappers = []any{
+	file_service_proto_msgTypes[11].OneofWrappers = []any{
 		(*UpdateServiceRequest_ServiceDataForUpdate)(nil),
 		(*UpdateServiceRequest_ServicePhoto)(nil),
 	}
@@ -1398,7 +1576,7 @@ func file_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_service_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   21,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
