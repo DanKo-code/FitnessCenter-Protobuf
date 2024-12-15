@@ -38,6 +38,7 @@ message AbonementDataForCreate {
   string validity = 2;
   string visiting_time = 3;
   int32 price = 4;
+  repeated string servicesIds = 5;
 }
 message AbonementDataForUpdate {
   string id = 1;
