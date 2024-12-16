@@ -56,7 +56,7 @@ message CreateAbonementRequest {
   }
 }
 message CreateAbonementResponse {
-  AbonementObject abonementObject = 1;
+  repeated AbonementWithServices abonementsWithServices = 1;
 }
 
 message GetAbonementByIdRequest {
