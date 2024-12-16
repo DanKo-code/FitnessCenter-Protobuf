@@ -46,7 +46,7 @@ message AbonementDataForUpdate {
   string validity = 3;
   string visiting_time = 4;
   int32 price = 5;
-  string updated_time = 6;
+  repeated string servicesIds = 6;
 }
 
 message CreateAbonementRequest {
@@ -73,7 +73,7 @@ message UpdateAbonementRequest  {
   }
 }
 message UpdateAbonementResponse  {
-  AbonementObject abonementObject = 1;
+  AbonementWithServices abonementWithServices = 1;
 }
 
 message DeleteAbonementByIdRequest {
