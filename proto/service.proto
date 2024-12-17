@@ -16,6 +16,7 @@ service Service {
   rpc CreateCoachServices (CreateCoachServicesRequest) returns (CreateCoachServicesResponse);
   rpc CreateAbonementServices (CreateAbonementServicesRequest) returns (CreateAbonementServicesResponse);
   rpc UpdateAbonementServices (UpdateAbonementServicesRequest) returns (UpdateAbonementServicesResponse);
+  rpc UpdateCoachServices (UpdateCoachServicesRequest) returns (UpdateCoachServicesResponse);
   rpc GetAbonementsServices (GetAbonementsServicesRequest) returns (GetAbonementsServicesResponse);
   rpc GetCoachesServices (GetCoachesServicesRequest) returns (GetCoachesServicesResponse);
 }
@@ -110,6 +111,13 @@ message UpdateAbonementServicesRequest {
 }
 message UpdateAbonementServicesResponse {
   AbonementService abonementService = 1;
+}
+
+message UpdateCoachServicesRequest {
+  CoachService coachService = 1;
+}
+message UpdateCoachServicesResponse {
+  CoachService coachService = 1;
 }
 
 message GetAbonementsServicesRequest {
