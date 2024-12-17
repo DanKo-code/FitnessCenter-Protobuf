@@ -27,6 +27,7 @@ const (
 	User_GetUserByEmail_FullMethodName = "/fitness_center.user.User/GetUserByEmail"
 	User_CheckPassword_FullMethodName  = "/fitness_center.user.User/CheckPassword"
 	User_GetUsersByIds_FullMethodName  = "/fitness_center.user.User/GetUsersByIds"
+	User_GetClients_FullMethodName     = "/fitness_center.user.User/GetClients"
 )
 
 // UserClient is the client API for User service.
@@ -40,6 +41,7 @@ type UserClient interface {
 	GetUserByEmail(ctx context.Context, in *GetUserByEmailRequest, opts ...grpc.CallOption) (*GetUserByEmailResponse, error)
 	CheckPassword(ctx context.Context, in *CheckPasswordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetUsersByIds(ctx context.Context, in *GetUsersByIdsRequest, opts ...grpc.CallOption) (*GetUsersByIdsResponse, error)
+	GetClients(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetClientsResponse, error)
 }
 
 type userClient struct {
@@ -126,6 +128,16 @@ func (c *userClient) GetUsersByIds(ctx context.Context, in *GetUsersByIdsRequest
 	return out, nil
 }
 
+func (c *userClient) GetClients(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetClientsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetClientsResponse)
+	err := c.cc.Invoke(ctx, User_GetClients_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -137,6 +149,7 @@ type UserServer interface {
 	GetUserByEmail(context.Context, *GetUserByEmailRequest) (*GetUserByEmailResponse, error)
 	CheckPassword(context.Context, *CheckPasswordRequest) (*emptypb.Empty, error)
 	GetUsersByIds(context.Context, *GetUsersByIdsRequest) (*GetUsersByIdsResponse, error)
+	GetClients(context.Context, *emptypb.Empty) (*GetClientsResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -167,6 +180,9 @@ func (UnimplementedUserServer) CheckPassword(context.Context, *CheckPasswordRequ
 }
 func (UnimplementedUserServer) GetUsersByIds(context.Context, *GetUsersByIdsRequest) (*GetUsersByIdsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUsersByIds not implemented")
+}
+func (UnimplementedUserServer) GetClients(context.Context, *emptypb.Empty) (*GetClientsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetClients not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -293,6 +309,24 @@ func _User_GetUsersByIds_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetClients_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetClients(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetClients_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetClients(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -319,6 +353,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUsersByIds",
 			Handler:    _User_GetUsersByIds_Handler,
+		},
+		{
+			MethodName: "GetClients",
+			Handler:    _User_GetClients_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
