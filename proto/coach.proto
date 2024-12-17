@@ -37,6 +37,10 @@ message CoachWithServicesWithReviewsWithUsers{
   repeated service.ServiceObject services = 2;
   repeated ReviewWithUser reviewWithUser = 3;
 }
+message CoachWithServices{
+  CoachObject coach = 1;
+  repeated service.ServiceObject services = 2;
+}
 
 message CoachDataForCreate {
   string name = 1;
@@ -57,7 +61,7 @@ message CreateCoachRequest {
   }
 }
 message CreateCoachResponse {
-  CoachObject coachObject = 1;
+  CoachWithServices coachWithServices = 1;
 }
 
 message GetCoachByIdRequest {
@@ -74,7 +78,7 @@ message UpdateCoachRequest {
   }
 }
 message UpdateCoachResponse {
-  CoachObject coachObject = 1;
+  CoachWithServices coachWithServices = 1;
 }
 
 message DeleteCoachByIdRequest {
