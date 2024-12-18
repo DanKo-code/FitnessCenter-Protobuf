@@ -27,6 +27,7 @@ message AbonementObject {
   int32 price = 6;
   string created_time = 7;
   string updated_time = 8;
+  string stripe_price_id = 9;
 }
 message AbonementWithServices{
     AbonementObject abonement = 1;
