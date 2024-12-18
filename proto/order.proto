@@ -39,10 +39,9 @@ message GetUserOrdersResponse {
 }
 
 message CreateCheckoutSessionRequest {
-  string user_id = 1;
-  string client_id = 2;
-  string abonement_id = 3;
-  string stripe_price_id = 4;
+  string client_id = 1;
+  string abonement_id = 2;
+  string stripe_price_id = 3;
 }
 message CreateCheckoutSessionResponse {
   string session_url = 1;
