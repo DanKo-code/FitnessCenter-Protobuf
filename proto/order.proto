@@ -6,8 +6,8 @@ option go_package = "FitnessCenter.protobuf.order";
 
 service Order {
   rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse);
-
   rpc GetUserOrders (GetUserOrdersRequest) returns (GetUserOrdersResponse);
+  rpc CreateCheckoutSession (CreateCheckoutSessionRequest) returns (CreateCheckoutSessionResponse);
 }
 
 message OrderObject {
@@ -36,4 +36,13 @@ message GetUserOrdersRequest {
 }
 message GetUserOrdersResponse {
     repeated OrderObject userObjects = 1;
+}
+
+message CreateCheckoutSessionRequest {
+  string user_id = 1;
+  string client_id = 2;
+  string abonement_id = 3;
+}
+message CreateCheckoutSessionResponse {
+  string session_url = 1;
 }
