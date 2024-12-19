@@ -25,7 +25,7 @@ message OrderObject {
 message OrderObjectWithAbonementWithServices {
     OrderObject orderObject = 1;
     fitness_center.abonement.AbonementObject abonementObject = 2;
-    fitness_center.service.ServiceObject serviceObject = 3;
+    repeated fitness_center.service.ServiceObject serviceObjects = 3;
 }
 
 message OrderDataForCreate {
