@@ -16,6 +16,7 @@ service Abonement {
 
   rpc GetAbonements (google.protobuf.Empty) returns (GetAbonementsResponse);
   rpc GetAbonementsWithServices (google.protobuf.Empty) returns (GetAbonementsWithServicesResponse);
+  rpc GetAbonementsByIds (GetAbonementsByIdsRequest) returns (GetAbonementsByIdsResponse);
 }
 
 message AbonementObject {
@@ -90,4 +91,11 @@ message GetAbonementsResponse {
 
 message GetAbonementsWithServicesResponse {
     repeated AbonementWithServices abonementsWithServices = 1;
+}
+
+message GetAbonementsByIdsRequest {
+  repeated string ids = 1;
+}
+message GetAbonementsByIdsResponse {
+  repeated AbonementObject abonementObjects = 1;
 }

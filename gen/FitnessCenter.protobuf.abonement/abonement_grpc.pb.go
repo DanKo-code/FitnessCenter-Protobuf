@@ -26,6 +26,7 @@ const (
 	Abonement_DeleteAbonementById_FullMethodName       = "/fitness_center.abonement.Abonement/DeleteAbonementById"
 	Abonement_GetAbonements_FullMethodName             = "/fitness_center.abonement.Abonement/GetAbonements"
 	Abonement_GetAbonementsWithServices_FullMethodName = "/fitness_center.abonement.Abonement/GetAbonementsWithServices"
+	Abonement_GetAbonementsByIds_FullMethodName        = "/fitness_center.abonement.Abonement/GetAbonementsByIds"
 )
 
 // AbonementClient is the client API for Abonement service.
@@ -38,6 +39,7 @@ type AbonementClient interface {
 	DeleteAbonementById(ctx context.Context, in *DeleteAbonementByIdRequest, opts ...grpc.CallOption) (*DeleteAbonementByIdResponse, error)
 	GetAbonements(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAbonementsResponse, error)
 	GetAbonementsWithServices(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAbonementsWithServicesResponse, error)
+	GetAbonementsByIds(ctx context.Context, in *GetAbonementsByIdsRequest, opts ...grpc.CallOption) (*GetAbonementsByIdsResponse, error)
 }
 
 type abonementClient struct {
@@ -114,6 +116,16 @@ func (c *abonementClient) GetAbonementsWithServices(ctx context.Context, in *emp
 	return out, nil
 }
 
+func (c *abonementClient) GetAbonementsByIds(ctx context.Context, in *GetAbonementsByIdsRequest, opts ...grpc.CallOption) (*GetAbonementsByIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAbonementsByIdsResponse)
+	err := c.cc.Invoke(ctx, Abonement_GetAbonementsByIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AbonementServer is the server API for Abonement service.
 // All implementations must embed UnimplementedAbonementServer
 // for forward compatibility.
@@ -124,6 +136,7 @@ type AbonementServer interface {
 	DeleteAbonementById(context.Context, *DeleteAbonementByIdRequest) (*DeleteAbonementByIdResponse, error)
 	GetAbonements(context.Context, *emptypb.Empty) (*GetAbonementsResponse, error)
 	GetAbonementsWithServices(context.Context, *emptypb.Empty) (*GetAbonementsWithServicesResponse, error)
+	GetAbonementsByIds(context.Context, *GetAbonementsByIdsRequest) (*GetAbonementsByIdsResponse, error)
 	mustEmbedUnimplementedAbonementServer()
 }
 
@@ -151,6 +164,9 @@ func (UnimplementedAbonementServer) GetAbonements(context.Context, *emptypb.Empt
 }
 func (UnimplementedAbonementServer) GetAbonementsWithServices(context.Context, *emptypb.Empty) (*GetAbonementsWithServicesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAbonementsWithServices not implemented")
+}
+func (UnimplementedAbonementServer) GetAbonementsByIds(context.Context, *GetAbonementsByIdsRequest) (*GetAbonementsByIdsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAbonementsByIds not implemented")
 }
 func (UnimplementedAbonementServer) mustEmbedUnimplementedAbonementServer() {}
 func (UnimplementedAbonementServer) testEmbeddedByValue()                   {}
@@ -259,6 +275,24 @@ func _Abonement_GetAbonementsWithServices_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Abonement_GetAbonementsByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAbonementsByIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AbonementServer).GetAbonementsByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Abonement_GetAbonementsByIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AbonementServer).GetAbonementsByIds(ctx, req.(*GetAbonementsByIdsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Abonement_ServiceDesc is the grpc.ServiceDesc for Abonement service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -281,6 +315,10 @@ var Abonement_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAbonementsWithServices",
 			Handler:    _Abonement_GetAbonementsWithServices_Handler,
+		},
+		{
+			MethodName: "GetAbonementsByIds",
+			Handler:    _Abonement_GetAbonementsByIds_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
