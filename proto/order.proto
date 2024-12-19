@@ -5,6 +5,7 @@ package fitness_center.order;
 option go_package = "FitnessCenter.protobuf.order";
 
 import "abonement.proto";
+import "service.proto";
 
 service Order {
   rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse);
@@ -21,9 +22,10 @@ message OrderObject {
   string updated_time = 6;
 }
 
-message OrderObjectWithAbonement {
+message OrderObjectWithAbonementWithServices {
     OrderObject orderObject = 1;
     fitness_center.abonement.AbonementObject abonementObject = 2;
+    fitness_center.service.ServiceObject serviceObject = 3;
 }
 
 message OrderDataForCreate {
@@ -42,7 +44,7 @@ message GetUserOrdersRequest {
   string user_id = 1;
 }
 message GetUserOrdersResponse {
-    repeated OrderObjectWithAbonement orderObjectWithAbonement = 1;
+    repeated OrderObjectWithAbonementWithServices orderObjectWithAbonementWithServices = 1;
 }
 
 message CreateCheckoutSessionRequest {
