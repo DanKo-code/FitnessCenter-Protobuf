@@ -17,7 +17,7 @@ generate_review:
 	@protoc -I ./proto review.proto --go_out=./gen --go-grpc_out=./gen
 
 generate_order:
-	@protoc -I ./proto order.proto --go_out=./gen --go-grpc_out=./gen
+	@protoc -I ./proto order.proto --go_out=./gen --go-grpc_out=./gen --go_opt=Mabonement.proto=github.com/DanKo-code/FitnessCenter-Protobuf/gen/FitnessCenter.protobuf.abonement
 
 generate_all: generate_sso generate_user generate_coach generate_service generate_abonement generate_review generate_order
 	@echo "All proto file have been generated"
