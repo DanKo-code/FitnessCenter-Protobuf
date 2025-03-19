@@ -47,6 +47,7 @@ message CoachDataForCreate {
   string name = 1;
   string description = 2;
   repeated string coach_service_ids = 3;
+  string shift = 4;
 }
 message CoachDataForUpdate {
   string id = 1;
