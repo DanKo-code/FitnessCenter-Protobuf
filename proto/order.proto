@@ -20,6 +20,7 @@ message OrderObject {
   string status = 4;
   string created_time = 5;
   string updated_time = 6;
+  string expiration_time = 7;
 }
 
 message OrderObjectWithAbonementWithServices {
