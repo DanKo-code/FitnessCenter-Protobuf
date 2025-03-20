@@ -28,6 +28,7 @@ message CoachObject {
   string created_time = 5;
   string updated_time = 6;
   string user = 7;
+  string shift = 8;
 }
 message ReviewWithUser {
     review.ReviewObject reviewObject = 1;
